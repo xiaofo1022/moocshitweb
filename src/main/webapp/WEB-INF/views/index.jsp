@@ -1,0 +1,272 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="xiaofo">
+<title>慕课学</title>
+<link href="css/bootstrap.moocshit.css" rel="stylesheet"/>
+<link href="css/core.css" rel="stylesheet"/>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plupload.full.min.js"></script>
+<script src="js/qiniu.js"></script>
+<script src="js/qiniu_uploader.js"></script>
+</head>
+<!-- 
+<video controls="controls" autoplay="autoplay">
+	<source src="http://7xrbxj.com1.z0.glb.clouddn.com/lhJpiwko78aaNfZOL6W2xhwuvD2s" type="video/mp4" />
+</video> 
+-->
+<body>
+<div id="container" style="width:100%;padding:20px;position:relative;">
+	<button id="pickfiles" class="btn btn-primary">上传视频</button>
+</div>
+<nav class="navbar navbar-default" style="margin-bottom:0;">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="index.html" class="navbar-brand" style="padding-top:10px;">
+				<span class="glyphicon glyphicon-education"></span>
+				慕课学
+			</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">首页</a></li>
+				<li><a href="course.html">课程</a></li>
+				<li><a href="bbs.html">讨论区</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" data-toggle="modal" data-target="#login-modal">登录 / 注册</a></li>
+			</ul>
+			<form class="navbar-form navbar-right" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" style="width:260px;border-radius:1px;" placeholder="输入课程名称，如：大学英语">
+					<span class="input-group-btn">
+						<button class="btn btn-default" style="border-radius:1px;" type="button">检索</button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</nav>
+
+<div id="login-modal" class="modal fade">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">用户登录</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="用户名">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" placeholder="密码">
+				</div>
+				<div class="form-group" style="text-align:center;">
+					<a href="register.html">没有账号？点击注册 ></a>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="login()">登录</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="index-loop" class="carousel slide" data-ride="carousel">
+	<ol class="carousel-indicators">
+		<li data-target="#index-loop" data-slide-to="0" class="active"></li>
+		<li data-target="#index-loop" data-slide-to="1"></li>
+		<li data-target="#index-loop" data-slide-to="2"></li>
+	</ol>
+
+	<div class="carousel-inner" role="listbox">
+		<div class="item active">
+			<img src="images/loop/loop-4.jpg">
+		</div>
+		<div class="item">
+			<img src="images/loop/loop-5.png">
+		</div>
+		<div class="item">
+			<img src="images/loop/loop-1.jpg">
+		</div>
+	</div>
+
+	<a class="left carousel-control" href="#index-loop" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	</a>
+	<a class="right carousel-control" href="#index-loop" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	</a>
+</div>
+
+<div class="outer-block">
+	<div class="row-margin">
+		<div class="class-col clearfix">
+			<div class="fleft hot-title" style="background-color:#DB5700;">
+				<h2 onclick="seeMore()">热门课程 ></h2>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第1课</h5>
+					<h6>播放：1320次</h5>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第2课</h5>
+					<h6>播放：1221次</h5>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-3.jpg"/>
+					<h5>大学英语：第3课</h5>
+					<h6>播放：1199次</h5>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div data-type="see-more" class="class-block" onclick="seeMore()">
+					<img src="images/class-10.jpg"/>
+					<h6>&nbsp;</h6>
+					<h6>查看更多 ></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row row-margin">
+		<div class="class-col clearfix">
+			<div class="fleft hot-title" style="background-color:#F39D00;">
+				<h2 onclick="seeMore()">精品课程 ></h2>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-12.jpg"/>
+					<h5>考试培训：第1课</h5>
+					<h6>
+						评分：
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						9.9
+					</h6>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-5.jpg"/>
+					<h5>考试培训：第2课</h5>
+					<h6>
+						评分：
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						9.8
+					</h6>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-6.jpg"/>
+					<h5>考试培训：第3课</h5>
+					<h6>
+						评分：
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						<span class="glyphicon glyphicon-star yellow-star"></span>
+						9.7
+					</h6>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div data-type="see-more" class="class-block" onclick="seeMore()">
+					<img src="images/class-10.jpg"/>
+					<h6>&nbsp;</h6>
+					<h6>查看更多 ></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row row-margin">
+		<div class="class-col clearfix">
+			<div class="fleft hot-title" style="background-color:#5CABFE;">
+				<h2 onclick="seeMore()">最新课程 ></h2>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-7.jpg"/>
+					<h5>单词强化：第1课</h5>
+					<h6>更新时间：2015-9-3</h6>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-8.jpg"/>
+					<h5>单词强化：第2课</h5>
+					<h6>更新时间：2015-9-2</h6>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div class="class-block">
+					<img src="images/class-9.jpg"/>
+					<h5>单词强化：第3课</h5>
+					<h6>更新时间：2015-9-1</h6>
+				</div>
+			</div>
+			<div class="fleft class-list">
+				<div data-type="see-more" class="class-block" onclick="seeMore()">
+					<img src="images/class-10.jpg"/>
+					<h6>&nbsp;</h6>
+					<h6>查看更多 ></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	Copyright © 2015 Neau Computer Department All Rights Reserved
+	| 网站首页
+	| 高校联盟
+	| 关于我们
+	| 意见反馈
+	| 友情链接
+</div>
+
+<script>
+	$('.carousel').carousel();
+	
+	$(".class-block [data-type!='see-more']").click(function(e) {
+		location.assign("coursedetail.html");
+	});
+	
+	function seeMore() {
+		location.assign("course.html");
+	}
+	
+	function login() {
+		location.assign("index_logined.html");
+	}
+	
+	var uploader;
+	
+	+function init() {
+		uploader = getUploader("<c:url value='/upload/getUpToken'/>");
+	}();
+</script>
+</body>
+</html>

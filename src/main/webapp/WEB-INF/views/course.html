@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="xiaofo">
+<title>慕课学</title>
+<link href="css/bootstrap.moocshit.css" rel="stylesheet"/>
+<link href="css/core.css" rel="stylesheet"/>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<style>
+	body {
+		text-align:center;
+	}
+
+	.outer-block {
+		display:inline-block;
+		width:90%;
+		margin-top:40px;
+	}
+	
+	.row-all-class {
+		margin:20px 0;
+	}
+	
+	.class-all-list {
+		margin-right:10px;
+		text-align:center;
+	}
+	
+	.course-category {
+		display:inline-block;
+		width:980px;
+		border:1px solid #ccc;
+		margin-bottom:10px;
+		box-shadow:0px 0px 5px #ccc;
+		padding:20px;
+	}
+	
+	.course-block {
+		width:940px;
+		float:left;
+	}
+	
+	.course-block h3 {
+		margin:0;
+		color:#286A46;
+		float:left;
+	}
+	
+	.course-block p {
+		background-color:#ccc;
+		padding:10px;
+		float:left;
+		font-size:12px;
+		color:#fff;
+		margin:0;
+		margin-left:10px;
+	}
+	
+	.course-block p:hover {
+		background-color:#286A46;
+		cursor:pointer;
+	}
+	
+	.course-block p.active {
+		background-color:#286A46;
+	}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default" style="margin-bottom:0;">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="index.html" class="navbar-brand" style="padding-top:10px;">
+				<span class="glyphicon glyphicon-education"></span>
+				慕课学
+			</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="index.html">首页</a></li>
+				<li class="active"><a href="course.html">课程</a></li>
+				<li><a href="bbs.html">讨论区</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="background.html">[ 个人中心 ]</a></li>
+				<li><a href="#">退出</a></li>
+			</ul>
+			<form class="navbar-form navbar-right" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" style="width:260px;border-radius:1px;" placeholder="输入课程名称，如：大学英语">
+					<span class="input-group-btn">
+						<button class="btn btn-default" style="border-radius:1px;" type="button">检索</button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</nav>
+
+<div class="outer-block clearfix" style="margin-bottom:0;">
+	<div class="course-category clearfix">
+		<div class="course-block clearfix">
+			<h3>大学英语</h3>
+			<p class="active">听说读写</p>
+			<p>语言学习</p>
+			<p>日常实用英语</p>
+			<p>出国考试英语</p>
+			<p>国内应试英语</p>
+			<p>其它语种</p>
+			<p>单词速记</p>
+			<p>语法详解</p>
+			<p>历年真题回顾</p>
+		</div>
+	</div>
+	
+	<div class="course-category clearfix">
+		<div class="course-block">
+			<h3>托福</h3>
+			<p>出国考试英语</p>
+			<p>国内应试英语</p>
+			<p>其它语种</p>
+			<p>听说读写</p>
+			<p>语言学习</p>
+			<p>日常实用英语</p>
+			<p>语法详解</p>
+			<p>历年真题回顾</p>
+			<p>单词速记</p>
+		</div>
+	</div>
+	
+	<div class="course-category clearfix">
+		<div class="course-block">
+			<h3>雅思</h3>
+			<p>语法详解</p>
+			<p>历年真题回顾</p>
+			<p>单词速记</p>
+			<p>出国考试英语</p>
+			<p>国内应试英语</p>
+			<p>其它语种</p>
+			<p>听说读写</p>
+			<p>语言学习</p>
+			<p>日常实用英语</p>
+		</div>
+	</div>
+	
+	<div class="course-category clearfix">
+		<div class="course-block" style="border-right-width:0;">
+			<h3>四级考试</h3>
+			<p>语言学习</p>
+			<p>日常实用英语</p>
+			<p>语法详解</p>
+			<p>历年真题回顾</p>
+			<p>单词速记</p>
+			<p>出国考试英语</p>
+			<p>国内应试英语</p>
+			<p>其它语种</p>
+			<p>听说读写</p>
+		</div>
+	</div>
+	
+	<div class="course-category clearfix">
+		<div class="course-block" style="border-right-width:0;">
+			<h3>六级考试</h3>
+			<p>历年真题回顾</p>
+			<p>单词速记</p>
+			<p>出国考试英语</p>
+			<p>国内应试英语</p>
+			<p>其它语种</p>
+			<p>语言学习</p>
+			<p>日常实用英语</p>
+			<p>语法详解</p>
+			<p>听说读写</p>
+		</div>
+	</div>
+	
+	<div class="row-course">
+		<div class="class-col clearfix">
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第1课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第2课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-3.jpg"/>
+					<h5>大学英语：第3课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第4课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第5课</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row-course">
+		<div class="class-col clearfix">
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第6课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第7课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-3.jpg"/>
+					<h5>大学英语：第8课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第9课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第10课</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row-course">
+		<div class="class-col clearfix">
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第11课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第12课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-3.jpg"/>
+					<h5>大学英语：第13课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-1.jpg"/>
+					<h5>大学英语：第14课</h5>
+				</div>
+			</div>
+			<div class="fleft class-all-list">
+				<div class="class-block">
+					<img src="images/class-2.jpg"/>
+					<h5>大学英语：第15课</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<nav>
+	<ul class="pagination">
+		<li>
+			<a href="#" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		<li class="active"><a href="#">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">6</a></li>
+		<li><a href="#">7</a></li>
+		<li><a href="#">8</a></li>
+		<li><a href="#">9</a></li>
+		<li><a href="#">10</a></li>
+		<li>
+			<a href="#" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+
+<div class="footer">
+	Copyright © 2015 Neau Computer Department All Rights Reserved
+	| 网站首页
+	| 高校联盟
+	| 关于我们
+	| 意见反馈
+	| 友情链接
+</div>
+
+<script>
+	$(".class-block").click(function(e) {
+		location.assign("coursedetail.html");
+	});
+</script>
+</body>
+</html>
