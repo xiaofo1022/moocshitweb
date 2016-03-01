@@ -18,6 +18,11 @@ public class MainController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap modelMap) {
-		return "index";
+		return "index_logined";
+	}
+	
+	@RequestMapping(value="/background", method=RequestMethod.GET)
+	public String background(HttpServletRequest request, ModelMap modelMap) {
+		return "background";
 	}
 }

@@ -18,7 +18,7 @@ import com.xiaofo1022.moocshit.model.User;
 public class LoginFilter implements Filter {
 	
 	private Pattern allowedResources;
-	private final static String resPattern = ".*(background).*";
+	private final static String resPattern = ".*(background_real).*";
 	
 	public void init(FilterConfig arg0) throws ServletException {
 		allowedResources = Pattern.compile(resPattern);
