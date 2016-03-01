@@ -17,12 +17,12 @@
 <!-- 
 <video controls="controls" autoplay="autoplay">
 	<source src="http://7xrbxj.com1.z0.glb.clouddn.com/lhJpiwko78aaNfZOL6W2xhwuvD2s" type="video/mp4" />
-</video> 
--->
-<body>
+</video>
 <div id="container" style="width:100%;padding:20px;position:relative;">
 	<button id="pickfiles" class="btn btn-primary">上传视频</button>
 </div>
+-->
+<body>
 <nav class="navbar navbar-default" style="margin-bottom:0;">
 	<div class="container-fluid">
 		<div class="navbar-header">
