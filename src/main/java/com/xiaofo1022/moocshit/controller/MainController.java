@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xiaofo1022.moocshit.dao.CourseDao;
+import com.xiaofo1022.moocshit.dao.CourseTypeDao;
 
 @Controller("mainController")
 public class MainController {
 
 	@Autowired
 	private CourseDao courseDao;
+	@Autowired
+	private CourseTypeDao courseTypeDao;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap modelMap) {

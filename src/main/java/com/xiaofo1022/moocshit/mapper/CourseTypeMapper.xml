@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+	PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.xiaofo1022.moocshit.mapper.CourseTypeMapper">
+    <resultMap id="courseTypeMap" type="com.xiaofo1022.moocshit.model.CourseType">
+        <id property="id" column="ID"/>
+        <result property="typeName" column="COURSE_TYPE_NAME"/>
+        <result property="parentTypeId" column="PARENT_COURSE_TYPE_ID"/>
+    </resultMap>
+</mapper>
