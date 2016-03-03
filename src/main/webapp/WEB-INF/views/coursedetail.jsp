@@ -1,56 +1,35 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="author" content="xiaofo">
 <title>慕课学</title>
-<link href="css/bootstrap.moocshit.css" rel="stylesheet"/>
-<link href="css/core.css" rel="stylesheet"/>
-<link href="css/coursedetail.css" rel="stylesheet"/>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<link href="<c:url value='/css/bootstrap.moocshit.css'/>" rel="stylesheet"/>
+<link href="<c:url value='/css/core.css'/>" rel="stylesheet"/>
+<link href="<c:url value='/css/coursedetail.css'/>" rel="stylesheet"/>
+<script src="<c:url value='/js/jquery.min.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.min.js'/>"></script>
+<script src="<c:url value='/js/angular.min.js'/>"></script>
+<script src="<c:url value='/js/angular/coursedetail.js'/>"></script>
 </head>
-<body>
-<nav class="navbar navbar-default" style="margin-bottom:0;">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a href="index.html" class="navbar-brand" style="padding-top:10px;">
-				<span class="glyphicon glyphicon-education"></span>
-				慕课学
-			</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.html">首页</a></li>
-				<li class="active"><a href="course.html">课程</a></li>
-				<li><a href="bbs.html">讨论区</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="background.html">[个人中心 ]</a></li>
-				<li><a href="#">退出</a></li>
-			</ul>
-			<form class="navbar-form navbar-right" role="search">
-				<div class="input-group">
-					<input type="text" class="form-control" style="width:260px;border-radius:1px;" placeholder="输入课程名称，如：大学英语">
-					<span class="input-group-btn">
-						<button class="btn btn-default" style="border-radius:1px;" type="button">检索</button>
-					</span>
-				</div>
-			</form>
-		</div>
-	</div>
-</nav>
+<body ng-app="coursedetail">
 
-<div class="container">
+<jsp:include page="header.jsp" flush="true"/>
+
+<input id="course_id" type="hidden" value="${course.id}"/>
+
+<div class="container" ng-controller="CourseDetailController" ng-model="course">
 <div class="row" style="margin:60px 0;">
 	<div class="col-md-8">
 		<div>
 			<video controls style="width:100%;">
-				<source src="video/1.mp4" type="video/mp4"/>
+				<source ng-model="course" src="http://7xrbxj.com1.z0.glb.clouddn.com/${course.courseVideoKey}" type="video/mp4"/>
 			</video>
 			<div class="video-bar clearfix">
-				<p class="fleft">
-					第一课：语法详解
+				<p class="fleft" ng-model="course">
+					${course.courseName}
 				</p>
 				<p class="fright">
 					评分：
@@ -196,14 +175,7 @@
 </div>
 </div>
 
-<div class="footer" style="position:absolute;bottom:0;">
-	Copyright © 2015 Neau Computer Department All Rights Reserved
-	| 网站首页
-	| 高校联盟
-	| 关于我们
-	| 意见反馈
-	| 友情链接
-</div>
+<jsp:include page="footer.jsp" flush="true"/>
 
 <script>
 	function changeCoursePage(element, id) {

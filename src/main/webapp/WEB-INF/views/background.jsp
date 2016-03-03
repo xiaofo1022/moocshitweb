@@ -29,7 +29,9 @@
 <div class="container">
 <div class="row" style="padding-top:20px;">
 	<div class="col-md-3">
-		<jsp:include page="bgnavigator.jsp" flush="true"/>
+		<jsp:include page="bgnavigator.jsp" flush="true">
+			<jsp:param name="active" value="background"/>
+		</jsp:include>
 	</div>
 	
 	<div class="col-md-6 col-md-offset-1" ng-controller="UpdateCourseController">

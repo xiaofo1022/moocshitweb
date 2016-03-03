@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,5 +38,11 @@ public class MainController {
 	@RequestMapping(value="/mycourse", method=RequestMethod.GET)
 	public String mycourse(HttpServletRequest request, ModelMap modelMap) {
 		return "mycourse";
+	}
+	
+	@RequestMapping(value="/courseDetail/{courseId}", method=RequestMethod.GET)
+	public String courseDetail(@PathVariable int courseId, HttpServletRequest request, ModelMap modelMap) {
+		modelMap.addAttribute("course", courseDao.getCourse(courseId));
+		return "coursedetail";
 	}
 }
