@@ -1,12 +1,12 @@
 /**
  * Qiniu Uploader
  */
-
-function getUploader(tokenUrl) {
+function getUploader(uptoken) {
 	return Qiniu.uploader({
 	    runtimes: 'html5,flash,html4',    //上传模式,依次退化
 	    browse_button: 'pickfiles',       //上传选择的点选按钮，**必需**
-	    uptoken: 'h9PCmkHaG7bpIbhnpDBYeGxFzI8d29Ii_ZnAsldy:HBS33nAf5kYb9CHjrmYuH0DsfvE=:eyJzY29wZSI6Im1vb2NzaGl0IiwiZGVhZGxpbmUiOjE0NTY3MTc1ODN9',
+	    //uptoken_url: tokenUrl,
+	    uptoken: uptoken,
 	    domain: 'http://qiniu-plupload.qiniudn.com/',
 	    container: 'container',           //上传区域DOM ID，默认是browser_button的父元素，
 	    max_file_size: '2048mb',          //最大文件体积限制
@@ -23,28 +23,38 @@ function getUploader(tokenUrl) {
 	        },
 	        'BeforeUpload': function(up, file) {
 	            // 每个文件上传前,处理相关的事情
+	        	$("#pickfiles").attr('disabled', 'disabled');
+	        	$("#pickfiles").text('上传中...(0%)');
 	        },
 	        'UploadProgress': function(up, file) {
 	            // 每个文件上传时,处理相关的事情
-	        	console.log(up);
+	        	var speed = Math.round(file.speed / 1024);
+	        	$("#pickfiles").text('上传中...(' + file.percent + '%) ' + speed + 'KB/S');
 	        },
 	        'FileUploaded': function(up, file, info) {
-	           // 每个文件上传成功后,处理相关的事情
-	           // 其中 info 是文件上传成功后，服务端返回的json，形式如
-	           // {
-	           //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
-	           //    "key": "gogopher.jpg"
-	           // }
+	            // 每个文件上传成功后,处理相关的事情
+	            // 其中 info 是文件上传成功后，服务端返回的json，形式如
+	            // {
+	            //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+	            //    "key": "gogopher.jpg"
+	            // }
 	            var domain = up.getOption('domain');
 	            var res = jQuery.parseJSON(info);
-	            var sourceLink = domain + res.key;
+	            $("#course-video-key").val(res.key);
+	            $("#pickfiles").text('上传完成');
+	            $("#pickfiles").attr('class', '');
+	            $("#pickfiles").addClass('btn btn-success');
 	        },
 	        'Error': function(up, err, errTip) {
 	            //上传出错时,处理相关的事情
 	        	console.log(errTip);
+	        	$("#pickfiles").text('上传失败');
+	            $("#pickfiles").attr('class', '');
+	            $("#pickfiles").addClass('btn btn-danger');
 	        },
 	        'UploadComplete': function() {
 	            //队列文件处理完毕后,处理相关的事情
+	        	console.log('Upload complete!');
 	        },
 	        'Key': function(up, file) {
 	            // 若想在前端对每个文件的key进行个性化处理，可以配置该函数

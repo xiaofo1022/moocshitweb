@@ -2,7 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">  
 <configuration>
     <mappers>
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseTypeMapper.xml"/>
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseMapper.xml"/>
+        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseTypeMapper.xml" />
+        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseMapper.xml" />
     </mappers>
 </configuration>

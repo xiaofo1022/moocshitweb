@@ -2,6 +2,8 @@ package com.xiaofo1022.moocshit.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
@@ -17,4 +19,8 @@ public interface CourseTypeMapper {
 	@Select("SELECT * FROM COURSE_TYPE ORDER BY ID")
 	@ResultMap(value="courseTypeMap")
 	List<CourseType> getAllCourseType();
+	
+	@Insert("INSERT INTO COURSE_TYPE (COURSE_TYPE_NAME) VALUES (#{typeName})")
+	@Options(useGeneratedKeys=true)
+	int addCourseType(CourseType courseType);
 }
