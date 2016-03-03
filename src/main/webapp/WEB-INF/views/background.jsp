@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -21,72 +23,13 @@
 </style>
 </head>
 <body ng-app="background">
-<nav class="navbar navbar-default" style="margin-bottom:0;">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a href="index.html" class="navbar-brand" style="padding-top:10px;">
-				<span class="glyphicon glyphicon-education"></span>
-				慕课学
-			</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.html">首页</a></li>
-				<li><a href="course.html">课程</a></li>
-				<li><a href="bbs.html">讨论区</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="#">[ 个人中心 ]</a></li>
-				<li><a href="#">退出</a></li>
-			</ul>
-			<form class="navbar-form navbar-right" role="search">
-				<div class="input-group">
-					<input type="text" class="form-control" style="width:260px;border-radius:1px;" placeholder="输入课程名称，如：大学英语">
-					<span class="input-group-btn">
-						<button class="btn btn-default" style="border-radius:1px;" type="button">检索</button>
-					</span>
-				</div>
-			</form>
-		</div>
-	</div>
-</nav>
+
+<jsp:include page="header.jsp" flush="true"/>
 
 <div class="container">
 <div class="row" style="padding-top:20px;">
 	<div class="col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-heading" style="text-align:center;">
-				个人中心
-			</div>
-			<div class="panel-body">
-				<ul class="list-group" style="margin-bottom:0;">
-					<a href="#" class="list-group-item active">
-						课程上传
-					</a>
-					<a href="#" class="list-group-item">
-						我的课程
-					</a>
-					<a href="#" class="list-group-item">
-						我的讨论
-					</a>
-					<a href="#" class="list-group-item">
-						个人资料
-					</a>
-					<a href="#" class="list-group-item">
-						讨论管理
-					</a>
-					<a href="#" class="list-group-item">
-						课程管理
-					</a>
-					<a href="#" class="list-group-item">
-						视频审核
-					</a>
-					<a href="#" class="list-group-item">
-						用户管理
-					</a>
-				</ul>
-			</div>
-		</div>
+		<jsp:include page="bgnavigator.jsp" flush="true"/>
 	</div>
 	
 	<div class="col-md-6 col-md-offset-1" ng-controller="UpdateCourseController">
@@ -156,68 +99,10 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- 
-	<div class="col-md-9">
-		<h3>观看记录</h3>
-		<div class="clearfix">
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-1.jpg"/>
-					<h5>大学英语：第1课</h5>
-					<h6>观看到：3分59秒</h5>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-2.jpg"/>
-					<h5>大学英语：第2课</h5>
-					<h6>观看到：16分32秒</h5>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-3.jpg"/>
-					<h5>大学英语：第3课</h5>
-					<h6>观看到：32分12秒</h5>
-				</div>
-			</div>
-		</div>
-		<h3>已修课程</h3>
-		<div class="clearfix">
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-7.jpg"/>
-					<h5>大学英语：第4课</h5>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-5.jpg"/>
-					<h5>大学英语：第5课</h5>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-6.jpg"/>
-					<h5>大学英语：第6课</h5>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
-	 
 </div>
 </div>
 
-<div class="footer" style="position:fixed;bottom:0;">
-	Copyright © 2015 Neau Computer Department All Rights Reserved
-	| 网站首页
-	| 高校联盟
-	| 关于我们
-	| 意见反馈
-	| 友情链接
-</div>
+<jsp:include page="footer.jsp" flush="true"/>
 
 <script>
 	$(".class-block").click(function(e) {

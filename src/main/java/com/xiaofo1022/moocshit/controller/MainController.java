@@ -19,13 +19,23 @@ public class MainController {
 	@Autowired
 	private CourseTypeDao courseTypeDao;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String index(HttpServletRequest request, ModelMap modelMap) {
+	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
+	public String main(HttpServletRequest request, ModelMap modelMap) {
 		return "index_logined";
+	}
+	
+	@RequestMapping(value="/course", method=RequestMethod.GET)
+	public String course(HttpServletRequest request, ModelMap modelMap) {
+		return "index";
 	}
 	
 	@RequestMapping(value="/background", method=RequestMethod.GET)
 	public String background(HttpServletRequest request, ModelMap modelMap) {
 		return "background";
+	}
+	
+	@RequestMapping(value="/mycourse", method=RequestMethod.GET)
+	public String mycourse(HttpServletRequest request, ModelMap modelMap) {
+		return "mycourse";
 	}
 }

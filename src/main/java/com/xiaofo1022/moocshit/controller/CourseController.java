@@ -43,4 +43,10 @@ public class CourseController {
 		courseMapper.addCourse(course);
 		return course.getId();
 	}
+	
+	@RequestMapping(value="/allCourse", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Course> allCourse() {
+		return courseMapper.getAllCourse();
+	}
 }

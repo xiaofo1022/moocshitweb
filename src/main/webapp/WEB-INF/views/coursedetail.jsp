@@ -6,59 +6,9 @@
 <title>慕课学</title>
 <link href="css/bootstrap.moocshit.css" rel="stylesheet"/>
 <link href="css/core.css" rel="stylesheet"/>
+<link href="css/coursedetail.css" rel="stylesheet"/>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<style>
-	a, p {
-		font-size:12px;
-	}
-
-	.list-group-item:hover {
-		cursor:pointer;
-	}
-	
-	.video-bar {
-		width:100%;
-		height:30px;
-		background-color:#000;
-	}
-	
-	.video-bar p {
-		color:#fff;
-		font-size:12px;
-		margin:7px;
-	}
-	
-	.comment-row {
-		padding-top:10px;
-		border-bottom:1px solid #ccc;
-	}
-	
-	.comment-page {
-		display:none;
-		position:relative;
-		height:100%;
-	}
-	
-	.comment-block {
-		position:absolute;
-		bottom:10px;
-		width:100%;
-	}
-	
-	.comment-star {
-		font-size:22px;
-	}
-	
-	.comment-star span:hover {
-		cursor:pointer;
-	}
-	
-	.detail-block {
-		display:none;
-		margin-top:-20px;
-	}
-</style>
 </head>
 <body>
 <nav class="navbar navbar-default" style="margin-bottom:0;">
@@ -76,7 +26,7 @@
 				<li><a href="bbs.html">讨论区</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="background.html">[ 个人中心 ]</a></li>
+				<li><a href="background.html">[个人中心 ]</a></li>
 				<li><a href="#">退出</a></li>
 			</ul>
 			<form class="navbar-form navbar-right" role="search">
