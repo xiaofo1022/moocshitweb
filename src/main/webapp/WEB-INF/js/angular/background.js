@@ -15,10 +15,13 @@ angular.module('background', []).controller(
 			}
 			$scope.course.courseVideoKey = courseVideoKey;
 			console.log($scope.course);
-			$http.post('course/addCourse', $scope.course).success(function(data) {
-	            console.log('New course id: ' + data);
-	            location.assign("background");
-	        })
+			var result = confirm("是否确认提交？");
+			if (result) {
+				$http.post('course/addCourse', $scope.course).success(function(data) {
+		            console.log('New course id: ' + data);
+		            location.assign("background");
+		        });
+			}
 		};
 		
 		$scope.addCourseType = function() {

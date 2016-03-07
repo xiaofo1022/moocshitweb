@@ -1,10 +1,20 @@
 package com.xiaofo1022.moocshit.model;
 
+import java.util.Date;
+
 public class User {
+	
 	private int id;
+	private Date insertDatetime;
+	private Date updateDatetime;
 	private String username;
 	private String password;
+	private String email;
+	private String phone;
+	private int roleId;
+	private Role role;
 	private int isActive;
+	private String remark;
 	
 	public int getId() {
 		return id;
@@ -29,5 +39,47 @@ public class User {
 	}
 	public void setIsActive(int isActive) {
 		this.isActive = isActive;
+	}
+	public Date getInsertDatetime() {
+		return insertDatetime;
+	}
+	public void setInsertDatetime(Date insertDatetime) {
+		this.insertDatetime = insertDatetime;
+	}
+	public Date getUpdateDatetime() {
+		return updateDatetime;
+	}
+	public void setUpdateDatetime(Date updateDatetime) {
+		this.updateDatetime = updateDatetime;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public int getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

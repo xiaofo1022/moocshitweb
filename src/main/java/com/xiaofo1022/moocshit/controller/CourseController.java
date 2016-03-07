@@ -2,6 +2,9 @@ package com.xiaofo1022.moocshit.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,7 @@ import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
 import com.xiaofo1022.moocshit.model.CourseType;
+import com.xiaofo1022.moocshit.model.User;
 
 @Controller
 @RequestMapping("/course")
@@ -39,7 +43,12 @@ public class CourseController {
 	
 	@RequestMapping(value="/addCourse", method=RequestMethod.POST)
 	@ResponseBody
-	public long addCourse(@RequestBody Course course) {
+	public long addCourse(@RequestBody Course course, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			User user = (User)session.getAttribute("user");
+			course.setUploadUserId(user.getId());
+		}
 		courseMapper.addCourse(course);
 		return course.getId();
 	}

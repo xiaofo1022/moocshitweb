@@ -10,47 +10,12 @@
 <link href="css/core.css" rel="stylesheet"/>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/plupload.full.min.js"></script>
-<script src="js/qiniu.js"></script>
-<script src="js/qiniu_uploader.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/angular/login.js"></script>
 </head>
-<!-- 
-<video controls="controls" autoplay="autoplay">
-	<source src="http://7xrbxj.com1.z0.glb.clouddn.com/lhJpiwko78aaNfZOL6W2xhwuvD2s" type="video/mp4" />
-</video>
-<div id="container" style="width:100%;padding:20px;position:relative;">
-	<button id="pickfiles" class="btn btn-primary">上传视频</button>
-</div>
--->
 <body>
-<nav class="navbar navbar-default" style="margin-bottom:0;">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a href="index.html" class="navbar-brand" style="padding-top:10px;">
-				<span class="glyphicon glyphicon-education"></span>
-				慕课学
-			</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">首页</a></li>
-				<li><a href="course.html">课程</a></li>
-				<li><a href="bbs.html">讨论区</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" data-toggle="modal" data-target="#login-modal">登录 / 注册</a></li>
-			</ul>
-			<form class="navbar-form navbar-right" role="search">
-				<div class="input-group">
-					<input type="text" class="form-control" style="width:260px;border-radius:1px;" placeholder="输入课程名称，如：大学英语">
-					<span class="input-group-btn">
-						<button class="btn btn-default" style="border-radius:1px;" type="button">检索</button>
-					</span>
-				</div>
-			</form>
-		</div>
-	</div>
-</nav>
+
+<jsp:include page="header.jsp" flush="true"/>
 
 <div id="login-modal" class="modal fade">
 	<div class="modal-dialog modal-sm">
@@ -67,7 +32,7 @@
 					<input type="password" class="form-control" placeholder="密码">
 				</div>
 				<div class="form-group" style="text-align:center;">
-					<a href="register.html">没有账号？点击注册 ></a>
+					<a href="register">没有账号？点击注册 ></a>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -238,14 +203,7 @@
 	</div>
 </div>
 
-<div class="footer">
-	Copyright © 2015 Neau Computer Department All Rights Reserved
-	| 网站首页
-	| 高校联盟
-	| 关于我们
-	| 意见反馈
-	| 友情链接
-</div>
+<jsp:include page="footer.jsp" flush="true"/>
 
 <script>
 	$('.carousel').carousel();
@@ -255,18 +213,12 @@
 	});
 	
 	function seeMore() {
-		location.assign("course.html");
+		location.assign("course");
 	}
 	
 	function login() {
 		location.assign("index_logined.html");
 	}
-	
-	var uploader;
-	
-	+function init() {
-		uploader = getUploader("<c:url value='/upload/getUpToken'/>");
-	}();
 </script>
 </body>
 </html>

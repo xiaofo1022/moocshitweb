@@ -42,5 +42,15 @@
     	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
     
+	<bean id="roleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.RoleMapper" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+    
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.UserMapper" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+    
 	<context:component-scan base-package="com.xiaofo1022.moocshit.dao" />
 </beans>

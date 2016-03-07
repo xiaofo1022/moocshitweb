@@ -16,7 +16,7 @@ public interface CourseMapper {
 	@ResultMap(value="courseMap")
 	Course getCourse(@Param("ID") long id);
 	
-	@Insert("INSERT INTO COURSE (COURSE_NAME, COURSE_TYPE_ID, COURSE_VIDEO_KEY, COURSE_REMARK) VALUES (#{courseName}, #{courseTypeId}, #{courseVideoKey}, #{courseRemark})")
+	@Insert("INSERT INTO COURSE (COURSE_NAME, COURSE_TYPE_ID, COURSE_VIDEO_KEY, COURSE_REMARK, UPLOAD_USER_ID) VALUES (#{courseName}, #{courseTypeId}, #{courseVideoKey}, #{courseRemark}, #{uploadUserId})")
 	@Options(useGeneratedKeys=true)
 	int addCourse(Course course);
 	

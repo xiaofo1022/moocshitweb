@@ -25,3 +25,49 @@ CREATE TABLE `course_type` (
   `PARENT_COURSE_TYPE_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 2016-3-7
+-- ----------------------------
+-- Table structure for `roles`
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ROLE_NAME` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of roles
+-- ----------------------------
+INSERT INTO `roles` VALUES ('1', 'STUDENT');
+INSERT INTO `roles` VALUES ('2', 'TEACHER');
+INSERT INTO `roles` VALUES ('3', 'ADMIN');
+INSERT INTO `roles` VALUES ('4', 'S_ADMIN');
+
+-- ----------------------------
+-- Table structure for `users`
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `INSERT_DATETIME` datetime DEFAULT NULL,
+  `UPDATE_DATETIME` datetime DEFAULT NULL,
+  `USERNAME` varchar(50) DEFAULT NULL,
+  `PASSWORD` varchar(50) DEFAULT NULL,
+  `EMAIL` varchar(50) DEFAULT NULL,
+  `PHONE` varchar(11) DEFAULT NULL,
+  `REMARK` varchar(255) DEFAULT NULL,
+  `ROLE_ID` int(11) DEFAULT 0,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+DELIMITER ;;
+CREATE TRIGGER `USERS_INSERT` BEFORE INSERT ON `users` FOR EACH ROW SET NEW.INSERT_DATETIME = NOW(), NEW.UPDATE_DATETIME = NOW();;;
+DELIMITER ;
+DELIMITER ;;
+CREATE TRIGGER `USERS_UPDATE` BEFORE UPDATE ON `users` FOR EACH ROW SET NEW.UPDATE_DATETIME = NOW();;;
+DELIMITER ;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+	PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.xiaofo1022.moocshit.mapper.UserMapper">
+    
+    <resultMap id="userMap" type="com.xiaofo1022.moocshit.model.User">
+        <id property="id" column="ID"/>
+        <result property="insertDatetime" column="INSERT_DATETIME" javaType="java.util.Date"/>
+        <result property="updateDatetime" column="UPDATE_DATETIME" javaType="java.util.Date"/>
+        <result property="username" column="USERNAME" />
+        <result property="password" column="PASSWORD" />
+        <result property="email" column="EMAIL" />
+        <result property="phone" column="PHONE" />
+        <result property="remark" column="REMARK" />
+        <result property="roleId" column="ROLE_ID" />
+        <association property="role" 
+            column="ROLE_ID"
+            select="selectRole" />
+    </resultMap>
+    
+    <select id="selectRole" 
+        parameterType="com.xiaofo1022.moocshit.model.Role" 
+        resultMap="com.xiaofo1022.moocshit.mapper.RoleMapper.roleMap">
+        SELECT * FROM ROLES WHERE ID = #{id}
+    </select>
+    
+</mapper>

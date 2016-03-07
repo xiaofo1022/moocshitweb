@@ -13,7 +13,7 @@
 			<a href="mycourse" class="list-group-item <% if (active != null && active.equals("mycourse")) {%> active <%} %>">
 				我的课程
 			</a>
-			<a href="#" class="list-group-item">
+			<a href="myinformation" class="list-group-item <% if (active != null && active.equals("myinformation")) {%> active <%} %>">
 				个人资料
 			</a>
 			<a href="#" class="list-group-item">
