@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.xiaofo1022.moocshit.core.CoreUtil;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
@@ -85,7 +86,10 @@ public class MainController {
 	public String courseDetail(@PathVariable int courseId, HttpServletRequest request, ModelMap modelMap) {
 		Course course = courseMapper.getCourse(courseId);
 		if (course != null) {
+			User user = CoreUtil.getLoginUser(request);
+			modelMap.addAttribute("userId", user == null ? "" : user.getId());
 			modelMap.addAttribute("course", course);
+			modelMap.addAttribute("commentCount", course.getCommentList().size());
 			modelMap.addAttribute("courseList", courseMapper.getCourseListByType(course.getCourseTypeId()));
 		}
 		return "coursedetail";

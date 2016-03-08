@@ -13,26 +13,34 @@
         <result property="courseVideoKey" column="COURSE_VIDEO_KEY" />
         <result property="courseRemark" column="COURSE_REMARK" />
         <result property="uploadUserId" column="UPLOAD_USER_ID" />
+        <result property="totalScore" column="TOTAL_SCORE" />
         
         <association property="courseType" 
             column="COURSE_TYPE_ID"
+            javaType="com.xiaofo1022.moocshit.model.CourseType"
             select="selectCourseType" />
         
         <association property="uploadUser" 
             column="UPLOAD_USER_ID"
+            javaType="com.xiaofo1022.moocshit.model.User"
             select="selectUser" />
+        
+        <collection property="commentList" javaType="ArrayList" column="id" ofType="com.xiaofo1022.moocshit.model.Comment" select="selectComment" />
     </resultMap>
     
     <select id="selectCourseType" 
-        parameterType="com.xiaofo1022.moocshit.model.CourseType" 
         resultMap="com.xiaofo1022.moocshit.mapper.CourseTypeMapper.courseTypeMap">
         SELECT * FROM COURSE_TYPE WHERE ID = #{id}
     </select>
     
     <select id="selectUser" 
-        parameterType="com.xiaofo1022.moocshit.model.User" 
         resultMap="com.xiaofo1022.moocshit.mapper.UserMapper.userMap">
         SELECT * FROM USERS WHERE ID = #{id}
+    </select>
+    
+    <select id="selectComment" 
+        resultMap="com.xiaofo1022.moocshit.mapper.CommentMapper.commentMap">
+        SELECT * FROM COMMENTS WHERE COURSE_ID = #{id}
     </select>
     
 </mapper>

@@ -14,8 +14,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="<c:url value='/index' />">首页</a></li>
-				<li><a href="<c:url value='/course' />">课程</a></li>
+				<li <% if (active != null && active.equals("index")) { %> class="active" <% } %>><a href="<c:url value='/index' />">首页</a></li>
+				<li <% if (active != null && active.equals("course")) { %> class="active" <% } %>><a href="<c:url value='/course' />">课程</a></li>
 				<!-- 
 				<li><a href="bbs">讨论区</a></li>
 				-->
@@ -36,7 +36,7 @@
 					</script>
 				<% } else { %>
 					<li><a href="#" data-toggle="modal" data-target="#login-modal">登录 / 注册</a></li>
-					<div id="login-modal" class="modal fade" ng-app="login" ng-controller="LoginController">
+					<div id="login-modal" class="modal fade">
 						<div class="modal-dialog modal-sm">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -46,10 +46,10 @@
 								<div class="modal-body">
 									<form name="login_form">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="用户名" ng-model="loginUser.username" required>
+											<input id="login-name" type="text" class="form-control" placeholder="用户名" ng-model="loginUser.username" required>
 										</div>
 										<div class="form-group">
-											<input type="password" class="form-control" placeholder="密码" ng-model="loginUser.password" required>
+											<input id="login-pass" type="password" class="form-control" placeholder="密码" ng-model="loginUser.password" required>
 										</div>
 										<div class="form-group" style="text-align:center;">
 											<a href="<c:url value='/register' />">没有账号？点击注册 </a>
@@ -57,11 +57,41 @@
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" ng-disabled="login_form.$invalid" ng-click="login()">登录</button>
+									<button type="button" class="btn btn-primary" onclick="login()">登录</button>
 								</div>
 							</div>
 						</div>
 					</div>
+					<script>
+						function login() {
+							var username = $('#login-name').val();
+							var password = $('#login-pass').val();
+							
+							if (!username) {
+								alert('请填写用户名');
+								return;
+							}
+							if (!password) {
+								alert('请填写密码');
+								return;
+							}
+							
+							$.ajax({
+								url: "<c:url value='/user/login'/>",
+								type: "POST",
+								contentType : "application/json",
+								data: JSON.stringify({username:username, password:password}),
+								success: function(data) {
+									if (data.message != 'success') {
+										alert(data.message);
+										return;
+									} else {
+										location.reload();
+									}
+								}
+							});
+						}
+					</script>
 				<% } %>
 			</ul>
 			<form class="navbar-form navbar-right" role="search">

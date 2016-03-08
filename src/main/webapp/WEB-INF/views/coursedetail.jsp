@@ -20,8 +20,9 @@
 <jsp:include page="header.jsp" flush="true"/>
 
 <input id="course_id" type="hidden" value="${course.id}"/>
+<input id="user_id" type="hidden" value="${userId}"/>
 
-<div class="container" ng-app="coursedetail">
+<div class="container">
 <div class="row" style="margin:60px 0;">
 	<div class="col-md-8">
 		<div>
@@ -34,14 +35,12 @@
 				</p>
 				<p class="fright">
 					评分：
-					<span class="glyphicon glyphicon-star yellow-star"></span>
-					<span class="glyphicon glyphicon-star yellow-star"></span>
-					<span class="glyphicon glyphicon-star yellow-star"></span>
-					<span class="glyphicon glyphicon-star yellow-star"></span>
-					<span class="glyphicon glyphicon-star yellow-star"></span>
-					9.9
+					<jsp:include page="stars.jsp">
+						<jsp:param value="${course.totalScore}" name="stars"/>
+					</jsp:include>
+					${course.totalScore}
 				</p>
-				<p class="fright">评论：20条</p>
+				<p class="fright">评论：${commentCount}条</p>
 				<p class="fright">播放次数：1320次</p>
 			</div>
 		</div>
@@ -84,64 +83,34 @@
 				</div>
 				
 				<div id="comment-list" class="course-page comment-page">
-					<div class="clearfix comment-row">
-						<div class="clearfix">
-							<a href="#" class="fleft">张自力</a>
-							<p class="fright ml10">
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
+					<c:forEach items="${course.commentList}" var="comment">
+						<div class="clearfix comment-row">
+							<div class="clearfix">
+								<a href="#" class="fleft">${comment.commentUser.username}</a>
+								<p class="fright ml10">
+									<jsp:include page="stars.jsp">
+										<jsp:param value="${comment.score}" name="stars"/>
+									</jsp:include>
+								</p>
+								<p class="fright">2015-9-3 20:22</p>
+							</div>
+							<p>
+								${comment.comment}
 							</p>
-							<p class="fright">2015-9-3 20:22</p>
 						</div>
-						<p>
-							确实不错，讲得很细，赞！
-						</p>
-					</div>
-					<div class="clearfix comment-row">
-						<div class="clearfix">
-							<a href="#" class="fleft">梁志军</a>
-							<p class="fright ml10">
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star-empty yellow-star"></span>
+					</c:forEach>
+					<div class="comment-block clearfix" ng-app="coursedetail" ng-controller="CourseDetailController">
+						<form name="comment_form">
+							<textarea class="form-control" placeholder="我的评论" rows="3" ng-model="comment.comment" required></textarea>
+							<button class="btn btn-primary mt10 fright" ng-disabled="comment_form.$invalid" ng-click="submitComment()">提交</button>
+							<p id="starBlock" class="mt10 comment-star fleft">
+								<span class="glyphicon glyphicon-star-empty yellow-star" onclick="setCommentStar(this)"></span>
+								<span class="glyphicon glyphicon-star-empty yellow-star" onclick="setCommentStar(this)"></span>
+								<span class="glyphicon glyphicon-star-empty yellow-star" onclick="setCommentStar(this)"></span>
+								<span class="glyphicon glyphicon-star-empty yellow-star" onclick="setCommentStar(this)"></span>
+								<span class="glyphicon glyphicon-star-empty yellow-star" onclick="setCommentStar(this)"></span>
 							</p>
-							<p class="fright">2015-9-2 21:20</p>
-						</div>
-						<p>
-							有些地方听的不是很明白，需要多看几遍。
-						</p>
-					</div>
-					<div class="clearfix comment-row">
-						<div class="clearfix">
-							<a href="#" class="fleft">吴志贞</a>
-							<p class="fright ml10">
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-								<span class="glyphicon glyphicon-star yellow-star"></span>
-							</p>
-							<p class="fright">2015-9-1 12:20</p>
-						</div>
-						<p>
-							很喜欢这个老师讲课的风格！
-						</p>
-					</div>
-					<div class="comment-block clearfix">
-						<textarea class="form-control" placeholder="我的评论" rows="3"></textarea>
-						<button class="btn btn-primary mt10 fright">提交</button>
-						<p class="mt10 comment-star fleft">
-							<span class="glyphicon glyphicon-star-empty yellow-star"></span>
-							<span class="glyphicon glyphicon-star-empty yellow-star"></span>
-							<span class="glyphicon glyphicon-star-empty yellow-star"></span>
-							<span class="glyphicon glyphicon-star-empty yellow-star"></span>
-							<span class="glyphicon glyphicon-star-empty yellow-star"></span>
-						</p>
+						</form>
 					</div>
 				</div>
 				
@@ -166,6 +135,26 @@
 		$(element).addClass("active");
 		$(".course-page").css("display", "none");
 		$("#" + id).css("display", "block");
+	}
+	
+	var starHtml = '<span class="glyphicon glyphicon-star yellow-star" style="margin-right:6px;" onclick="setCommentStar(this)"></span>';
+	var emptyStarHtml = '<span class="glyphicon glyphicon-star-empty yellow-star mr10" style="margin-right:6px;" onclick="setCommentStar(this)"></span>';
+	
+	function setCommentStar(starNode) {
+		var index = $(starNode).index();
+		var score = (index + 1) * 2;
+		var insertHtml = "";
+		var starCount = 0;
+		for (var i = 0; i < score; i += 2) {
+			insertHtml += starHtml;
+			starCount++
+		}
+		for (var j = starCount; i < 10; i += 2) {
+			insertHtml += emptyStarHtml;
+		}
+		commentStar = score;
+		$('#starBlock').empty();
+		$('#starBlock').html(insertHtml);
 	}
 </script>
 </body>

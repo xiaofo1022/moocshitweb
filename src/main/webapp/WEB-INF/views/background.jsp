@@ -24,7 +24,9 @@
 </head>
 <body ng-app="background">
 
-<jsp:include page="header.jsp" flush="true"/>
+<jsp:include page="header.jsp" flush="true">
+	<jsp:param value="background" name="active" />
+</jsp:include>
 
 <div class="container">
 <div class="row" style="padding-top:20px;">

@@ -16,7 +16,9 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp">
+	<jsp:param value="course" name="active" />
+</jsp:include>
 
 <div class="outer-block clearfix" style="position:relative;margin-bottom:0;">
 	<div class="course-category clearfix">

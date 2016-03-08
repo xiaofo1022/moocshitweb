@@ -1,6 +1,7 @@
 package com.xiaofo1022.moocshit.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Course {
 
@@ -14,6 +15,8 @@ public class Course {
 	private String courseRemark;
 	private long uploadUserId;
 	private User uploadUser;
+	private int totalScore;
+	private List<Comment> commentList;
 	
 	public long getId() {
 		return id;
@@ -74,5 +77,17 @@ public class Course {
 	}
 	public void setUploadUser(User uploadUser) {
 		this.uploadUser = uploadUser;
+	}
+	public int getTotalScore() {
+		return totalScore;
+	}
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore;
+	}
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
 	}
 }

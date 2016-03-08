@@ -15,32 +15,9 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp" flush="true"/>
-
-<div id="login-modal" class="modal fade">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">用户登录</h4>
-			</div>
-			<div class="modal-body">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="用户名">
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="密码">
-				</div>
-				<div class="form-group" style="text-align:center;">
-					<a href="register">没有账号？点击注册 ></a>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="login()">登录</button>
-			</div>
-		</div>
-	</div>
-</div>
+<jsp:include page="header.jsp" flush="true">
+	<jsp:param value="index" name="active" />
+</jsp:include>
 
 <div id="index-loop" class="carousel slide" data-ride="carousel">
 	<ol class="carousel-indicators">
@@ -73,34 +50,34 @@
 	<div class="row-margin">
 		<div class="class-col clearfix">
 			<div class="fleft hot-title" style="background-color:#DB5700;">
-				<h2 onclick="seeMore()">热门课程 ></h2>
+				<h2 onclick="seeMore()">热门课程 &gt;</h2>
 			</div>
 			<div class="fleft class-list">
 				<div class="class-block">
 					<img src="images/class-1.jpg"/>
 					<h5>大学英语：第1课</h5>
-					<h6>播放：1320次</h5>
+					<h6>播放：1320次</h6>
 				</div>
 			</div>
 			<div class="fleft class-list">
 				<div class="class-block">
 					<img src="images/class-2.jpg"/>
 					<h5>大学英语：第2课</h5>
-					<h6>播放：1221次</h5>
+					<h6>播放：1221次</h6>
 				</div>
 			</div>
 			<div class="fleft class-list">
 				<div class="class-block">
 					<img src="images/class-3.jpg"/>
 					<h5>大学英语：第3课</h5>
-					<h6>播放：1199次</h5>
+					<h6>播放：1199次</h6>
 				</div>
 			</div>
 			<div class="fleft class-list">
 				<div data-type="see-more" class="class-block" onclick="seeMore()">
 					<img src="images/class-10.jpg"/>
 					<h6>&nbsp;</h6>
-					<h6>查看更多 ></h6>
+					<h6>查看更多 &gt;</h6>
 				</div>
 			</div>
 		</div>
@@ -109,7 +86,7 @@
 	<div class="row row-margin">
 		<div class="class-col clearfix">
 			<div class="fleft hot-title" style="background-color:#F39D00;">
-				<h2 onclick="seeMore()">精品课程 ></h2>
+				<h2 onclick="seeMore()">精品课程 &gt;</h2>
 			</div>
 			<div class="fleft class-list">
 				<div class="class-block">
@@ -160,7 +137,7 @@
 				<div data-type="see-more" class="class-block" onclick="seeMore()">
 					<img src="images/class-10.jpg"/>
 					<h6>&nbsp;</h6>
-					<h6>查看更多 ></h6>
+					<h6>查看更多 &gt;</h6>
 				</div>
 			</div>
 		</div>
@@ -169,7 +146,7 @@
 	<div class="row row-margin">
 		<div class="class-col clearfix">
 			<div class="fleft hot-title" style="background-color:#5CABFE;">
-				<h2 onclick="seeMore()">最新课程 ></h2>
+				<h2 onclick="seeMore()">最新课程 &gt;</h2>
 			</div>
 			<div class="fleft class-list">
 				<div class="class-block">
@@ -196,7 +173,7 @@
 				<div data-type="see-more" class="class-block" onclick="seeMore()">
 					<img src="images/class-10.jpg"/>
 					<h6>&nbsp;</h6>
-					<h6>查看更多 ></h6>
+					<h6>查看更多 &gt;</h6>
 				</div>
 			</div>
 		</div>
@@ -209,15 +186,11 @@
 	$('.carousel').carousel();
 	
 	$(".class-block [data-type!='see-more']").click(function(e) {
-		location.assign("coursedetail.html");
+		location.assign("course");
 	});
 	
 	function seeMore() {
 		location.assign("course");
-	}
-	
-	function login() {
-		location.assign("index_logined.html");
 	}
 </script>
 </body>

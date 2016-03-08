@@ -32,25 +32,28 @@
     	<property name="dataSource" ref="dataSource" /> 
     </bean>
     
+	<!-- Mappers -->
 	<bean id="courseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
     	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseMapper" />
     	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
-    
 	<bean id="courseTypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
     	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseTypeMapper" />
     	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
-    
 	<bean id="roleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
     	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.RoleMapper" />
     	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
-    
 	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
     	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.UserMapper" />
     	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
+    <bean id="commentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CommentMapper" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+    <!-- Mappers -->
     
 	<context:component-scan base-package="com.xiaofo1022.moocshit.dao" />
 </beans>
