@@ -2,9 +2,7 @@
  * Angular for login
  */
 
-var module = angular.module('login', []);
-
-module.controller('LoginController', function($scope, $http) {
+angular.module('login', []).controller('LoginController', function($scope, $http) {
 	$scope.loginUser = {};
 	
 	$scope.login = function() {

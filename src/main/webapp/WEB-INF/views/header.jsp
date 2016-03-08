@@ -52,7 +52,7 @@
 											<input type="password" class="form-control" placeholder="密码" ng-model="loginUser.password" required>
 										</div>
 										<div class="form-group" style="text-align:center;">
-											<a href="register">没有账号？点击注册 </a>
+											<a href="<c:url value='/register' />">没有账号？点击注册 </a>
 										</div>
 									</form>
 								</div>

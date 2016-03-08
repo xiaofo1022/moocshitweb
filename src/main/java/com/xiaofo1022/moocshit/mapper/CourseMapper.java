@@ -23,4 +23,8 @@ public interface CourseMapper {
 	@Select("SELECT * FROM COURSE ORDER BY INSERT_DATETIME DESC")
 	@ResultMap(value="courseMap")
 	List<Course> getAllCourse();
+	
+	@Select("SELECT * FROM COURSE WHERE COURSE_TYPE_ID = #{COURSE_TYPE_ID} ORDER BY INSERT_DATETIME DESC")
+	@ResultMap(value="courseMap")
+	List<Course> getCourseListByType(@Param("COURSE_TYPE_ID") long courseTypeId);
 }

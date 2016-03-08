@@ -1,5 +1,7 @@
 package com.xiaofo1022.moocshit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +11,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.xiaofo1022.moocshit.dao.CourseDao;
-import com.xiaofo1022.moocshit.dao.CourseTypeDao;
+import com.xiaofo1022.moocshit.mapper.CourseMapper;
+import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
+import com.xiaofo1022.moocshit.model.Course;
+import com.xiaofo1022.moocshit.model.CourseType;
 import com.xiaofo1022.moocshit.model.User;
 
 @Controller("mainController")
 public class MainController {
 
 	@Autowired
-	private CourseDao courseDao;
+	private CourseMapper courseMapper;
 	@Autowired
-	private CourseTypeDao courseTypeDao;
+	private CourseTypeMapper courseTypeMapper;
 	
 	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
 	public String main(HttpServletRequest request, ModelMap modelMap) {
@@ -28,7 +32,29 @@ public class MainController {
 	
 	@RequestMapping(value="/course", method=RequestMethod.GET)
 	public String course(HttpServletRequest request, ModelMap modelMap) {
-		return "index";
+		fillCourseModelMap(0, modelMap);
+		return "course";
+	}
+	
+	@RequestMapping(value="/course/{courseTypeId}", method=RequestMethod.GET)
+	public String courseByType(@PathVariable int courseTypeId, HttpServletRequest request, ModelMap modelMap) {
+		fillCourseModelMap(courseTypeId, modelMap);
+		return "course";
+	}
+	
+	private void fillCourseModelMap(int courseTypeId, ModelMap modelMap) {
+		List<CourseType> courseTypeList = courseTypeMapper.getAllCourseType();
+		if (courseTypeList != null && courseTypeList.size() > 0) {
+			CourseType courseType = null;
+			if (courseTypeId == 0) {
+				courseType = courseTypeList.get(0);
+			} else {
+				courseType = courseTypeMapper.getCourseType(courseTypeId);
+			}
+			modelMap.addAttribute("courseTypeList", courseTypeList);
+			modelMap.addAttribute("courseType", courseType);
+			modelMap.addAttribute("courseList", courseMapper.getCourseListByType(courseType.getId()));
+		}
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
@@ -57,7 +83,11 @@ public class MainController {
 	
 	@RequestMapping(value="/courseDetail/{courseId}", method=RequestMethod.GET)
 	public String courseDetail(@PathVariable int courseId, HttpServletRequest request, ModelMap modelMap) {
-		modelMap.addAttribute("course", courseDao.getCourse(courseId));
+		Course course = courseMapper.getCourse(courseId);
+		if (course != null) {
+			modelMap.addAttribute("course", course);
+			modelMap.addAttribute("courseList", courseMapper.getCourseListByType(course.getCourseTypeId()));
+		}
 		return "coursedetail";
 	}
 }

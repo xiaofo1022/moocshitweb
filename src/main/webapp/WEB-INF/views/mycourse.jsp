@@ -32,7 +32,6 @@
 				<div class="class-block">
 					<img src="images/class-1.jpg"/>
 					<h5>{{course.courseType.typeName}} - {{course.courseName}}</h5>
-					<h6>{{course.courseRemark}}</h6>
 				</div>
 			</div>
 		</div>

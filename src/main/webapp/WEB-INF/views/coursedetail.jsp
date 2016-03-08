@@ -13,14 +13,15 @@
 <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/js/angular.min.js'/>"></script>
 <script src="<c:url value='/js/angular/coursedetail.js'/>"></script>
+<script src="<c:url value='/js/angular/login.js'/>"></script>
 </head>
-<body ng-app="coursedetail">
+<body>
 
 <jsp:include page="header.jsp" flush="true"/>
 
 <input id="course_id" type="hidden" value="${course.id}"/>
 
-<div class="container" ng-controller="CourseDetailController" ng-model="course">
+<div class="container" ng-app="coursedetail">
 <div class="row" style="margin:60px 0;">
 	<div class="col-md-8">
 		<div>
@@ -29,7 +30,7 @@
 			</video>
 			<div class="video-bar clearfix">
 				<p class="fleft" ng-model="course">
-					${course.courseName}
+					${course.courseType.typeName} : ${course.courseName}
 				</p>
 				<p class="fright">
 					评分：
@@ -63,38 +64,22 @@
 			<div class="panel-body" style="height:390px;">
 				<div id="course-list" class="course-page">
 					<ul class="list-group" style="margin-bottom:0;">
-						<li class="list-group-item active">
-							第1课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第2课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第3课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第4课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第5课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第6课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第7课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
-						<li class="list-group-item">
-							第8课：语法详解
-							<span style="float:right;">44:56</span>
-						</li>
+						<c:forEach items="${courseList}" var="courseItem" varStatus="status">
+							<c:choose>
+								<c:when test="${courseItem.id == course.id}">
+									<li class="list-group-item active">
+										第${status.index + 1}课：${courseItem.courseName}
+										<span style="float:right;">44:56</span>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="list-group-item">
+										第${status.index + 1}课：${courseItem.courseName}
+										<span style="float:right;">44:56</span>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</ul>
 				</div>
 				
@@ -161,12 +146,10 @@
 				</div>
 				
 				<div id="course-detail" class="course-page detail-block">
-					<h3>课程：语法详解1</h3>
-					<h5>讲师：柳发银</h5>
+					<h3>课程：${course.courseName}</h3>
+					<h5>讲师：${course.uploadUser.username}</h5>
 					<p>	
-						简介：英语是世界上使用最广泛的的语言，直接影响每个人的工作生活。
-						学好英语，升学求职更如意。本专题将从三个方面教你如何玩转英语
-						~原来英语如此有趣~
+						简介：${course.courseRemark}
 					</p>
 				</div>
 			</div>

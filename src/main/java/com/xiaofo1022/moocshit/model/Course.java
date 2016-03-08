@@ -13,6 +13,7 @@ public class Course {
 	private String courseVideoKey;
 	private String courseRemark;
 	private long uploadUserId;
+	private User uploadUser;
 	
 	public long getId() {
 		return id;
@@ -67,5 +68,11 @@ public class Course {
 	}
 	public void setCourseType(CourseType courseType) {
 		this.courseType = courseType;
+	}
+	public User getUploadUser() {
+		return uploadUser;
+	}
+	public void setUploadUser(User uploadUser) {
+		this.uploadUser = uploadUser;
 	}
 }
