@@ -22,13 +22,13 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<% if (isLogined) { %>
-					<li <% if (active != null && active.equals("background")) { %> class="active" <% } %>><a href="background">[个人中心 ]</a></li>
+					<li <% if (active != null && active.equals("background")) { %> class="active" <% } %>><a href="<c:url value='/background' />">[个人中心 ]</a></li>
 					<li><a href="#" onclick="logout()">退出</a></li>
 					<script>
 						function logout() {
 							var result = confirm("是否确认退出？");
 							if (result) {
-								$.get("user/logout", function(data) {
+								$.get("<c:url value='/user/logout' />", function(data) {
 									location.replace("index");
 								});
 							}

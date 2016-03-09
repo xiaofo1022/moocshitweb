@@ -14,6 +14,7 @@
         <result property="courseRemark" column="COURSE_REMARK" />
         <result property="uploadUserId" column="UPLOAD_USER_ID" />
         <result property="totalScore" column="TOTAL_SCORE" />
+        <result property="playTimes" column="PLAY_TIMES" />
         
         <association property="courseType" 
             column="COURSE_TYPE_ID"

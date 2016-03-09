@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -52,27 +53,15 @@
 			<div class="fleft hot-title" style="background-color:#DB5700;">
 				<h2 onclick="seeMore()">热门课程 &gt;</h2>
 			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-1.jpg"/>
-					<h5>大学英语：第1课</h5>
-					<h6>播放：1320次</h6>
+			<c:forEach items="${hotestCourseList}" var="hotestCourse">
+				<div class="fleft class-list" onclick="toDetail(${hotestCourse.id})">
+					<div class="class-block">
+						<img src="images/class-1.jpg"/>
+						<h5>${hotestCourse.courseType.typeName }：${hotestCourse.courseName}</h5>
+						<h6>播放：${hotestCourse.playTimes}次</h6>
+					</div>
 				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-2.jpg"/>
-					<h5>大学英语：第2课</h5>
-					<h6>播放：1221次</h6>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-3.jpg"/>
-					<h5>大学英语：第3课</h5>
-					<h6>播放：1199次</h6>
-				</div>
-			</div>
+			</c:forEach>
 			<div class="fleft class-list">
 				<div data-type="see-more" class="class-block" onclick="seeMore()">
 					<img src="images/class-10.jpg"/>
@@ -88,51 +77,21 @@
 			<div class="fleft hot-title" style="background-color:#F39D00;">
 				<h2 onclick="seeMore()">精品课程 &gt;</h2>
 			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-12.jpg"/>
-					<h5>考试培训：第1课</h5>
-					<h6>
-						评分：
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						9.9
-					</h6>
+			<c:forEach items="${bestCourseList}" var="bestCourse">
+				<div class="fleft class-list" onclick="toDetail(${bestCourse.id})">
+					<div class="class-block">
+						<img src="images/class-12.jpg"/>
+						<h5>${bestCourse.courseType.typeName }：${bestCourse.courseName}</h5>
+						<h6>
+							评分：
+							<jsp:include page="stars.jsp">
+								<jsp:param value="${bestCourse.totalScore}" name="stars"/>
+							</jsp:include>
+							${bestCourse.totalScore}
+						</h6>
+					</div>
 				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-5.jpg"/>
-					<h5>考试培训：第2课</h5>
-					<h6>
-						评分：
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						9.8
-					</h6>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-6.jpg"/>
-					<h5>考试培训：第3课</h5>
-					<h6>
-						评分：
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						<span class="glyphicon glyphicon-star yellow-star"></span>
-						9.7
-					</h6>
-				</div>
-			</div>
+			</c:forEach>
 			<div class="fleft class-list">
 				<div data-type="see-more" class="class-block" onclick="seeMore()">
 					<img src="images/class-10.jpg"/>
@@ -148,27 +107,15 @@
 			<div class="fleft hot-title" style="background-color:#5CABFE;">
 				<h2 onclick="seeMore()">最新课程 &gt;</h2>
 			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-7.jpg"/>
-					<h5>单词强化：第1课</h5>
-					<h6>更新时间：2015-9-3</h6>
+			<c:forEach items="${hotestCourseList}" var="latestCourse">
+				<div class="fleft class-list" onclick="toDetail(${latestCourse.id})">
+					<div class="class-block">
+						<img src="images/class-7.jpg"/>
+						<h5>${latestCourse.courseType.typeName }：${latestCourse.courseName}</h5>
+						<h6>更新时间：<fmt:formatDate pattern="yyyy-MM-dd" value="${latestCourse.updateDatetime}" /></h6>
+					</div>
 				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-8.jpg"/>
-					<h5>单词强化：第2课</h5>
-					<h6>更新时间：2015-9-2</h6>
-				</div>
-			</div>
-			<div class="fleft class-list">
-				<div class="class-block">
-					<img src="images/class-9.jpg"/>
-					<h5>单词强化：第3课</h5>
-					<h6>更新时间：2015-9-1</h6>
-				</div>
-			</div>
+			</c:forEach>
 			<div class="fleft class-list">
 				<div data-type="see-more" class="class-block" onclick="seeMore()">
 					<img src="images/class-10.jpg"/>
@@ -185,12 +132,12 @@
 <script>
 	$('.carousel').carousel();
 	
-	$(".class-block [data-type!='see-more']").click(function(e) {
-		location.assign("course");
-	});
+	function toDetail(courseId) {
+		location.assign("<c:url value='/courseDetail/" + courseId + "'/>");
+	}
 	
 	function seeMore() {
-		location.assign("course");
+		location.assign("<c:url value='/course'/>");
 	}
 </script>
 </body>

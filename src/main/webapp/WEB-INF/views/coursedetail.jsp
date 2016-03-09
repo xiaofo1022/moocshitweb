@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -26,7 +27,7 @@
 <div class="row" style="margin:60px 0;">
 	<div class="col-md-8">
 		<div>
-			<video controls style="width:100%;">
+			<video id="video" controls autoplay style="width:100%;">
 				<source ng-model="course" src="http://7xrbxj.com1.z0.glb.clouddn.com/${course.courseVideoKey}" type="video/mp4"/>
 			</video>
 			<div class="video-bar clearfix">
@@ -41,7 +42,7 @@
 					${course.totalScore}
 				</p>
 				<p class="fright">评论：${commentCount}条</p>
-				<p class="fright">播放次数：1320次</p>
+				<p class="fright">播放次数：${course.playTimes}次</p>
 			</div>
 		</div>
 	</div>
@@ -92,7 +93,7 @@
 										<jsp:param value="${comment.score}" name="stars"/>
 									</jsp:include>
 								</p>
-								<p class="fright">2015-9-3 20:22</p>
+								<p class="fright"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.insertDatetime}" /></p>
 							</div>
 							<p>
 								${comment.comment}
@@ -137,6 +138,7 @@
 		$("#" + id).css("display", "block");
 	}
 	
+	var baseUrl = '<c:url value="/" />'
 	var starHtml = '<span class="glyphicon glyphicon-star yellow-star" style="margin-right:6px;" onclick="setCommentStar(this)"></span>';
 	var emptyStarHtml = '<span class="glyphicon glyphicon-star-empty yellow-star mr10" style="margin-right:6px;" onclick="setCommentStar(this)"></span>';
 	
@@ -156,6 +158,17 @@
 		$('#starBlock').empty();
 		$('#starBlock').html(insertHtml);
 	}
+	
+	var isPlayed = false;
+	var courseId = $('#course_id').val();
+	
+	$('#video').bind('play', function(event) {
+		if (!isPlayed) {
+			$.get('<c:url value="/course/addPlayTimes/' + courseId + '"/>', function(data) {
+				isPlayed = true;
+			});
+		}
+	});
 </script>
 </body>
 </html>

@@ -7,11 +7,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xiaofo1022.moocshit.core.GlobalData;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
@@ -57,5 +59,12 @@ public class CourseController {
 	@ResponseBody
 	public List<Course> allCourse() {
 		return courseMapper.getAllCourse();
+	}
+	
+	@RequestMapping(value="/addPlayTimes/{courseId}", method=RequestMethod.GET)
+	@ResponseBody
+	public int addPlayTimes(@PathVariable int courseId) {
+		courseMapper.addPlayTimes(courseId);
+		return GlobalData.SUCCESS_CODE;
 	}
 }

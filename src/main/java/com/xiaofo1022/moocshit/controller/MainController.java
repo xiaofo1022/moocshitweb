@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xiaofo1022.moocshit.core.CoreUtil;
+import com.xiaofo1022.moocshit.mapper.CommentMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
@@ -25,9 +26,14 @@ public class MainController {
 	private CourseMapper courseMapper;
 	@Autowired
 	private CourseTypeMapper courseTypeMapper;
+	@Autowired
+	private CommentMapper commentMapper;
 	
 	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
 	public String main(HttpServletRequest request, ModelMap modelMap) {
+		modelMap.addAttribute("hotestCourseList", courseMapper.getHotestCourseList());
+		modelMap.addAttribute("bestCourseList", courseMapper.getBestCourseList());
+		modelMap.addAttribute("latestCourseList", courseMapper.getLatestCourseList());
 		return "index";
 	}
 	

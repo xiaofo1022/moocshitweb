@@ -15,7 +15,8 @@ public class Course {
 	private String courseRemark;
 	private long uploadUserId;
 	private User uploadUser;
-	private int totalScore;
+	private double totalScore;
+	private int playTimes;
 	private List<Comment> commentList;
 	
 	public long getId() {
@@ -78,10 +79,10 @@ public class Course {
 	public void setUploadUser(User uploadUser) {
 		this.uploadUser = uploadUser;
 	}
-	public int getTotalScore() {
+	public double getTotalScore() {
 		return totalScore;
 	}
-	public void setTotalScore(int totalScore) {
+	public void setTotalScore(double totalScore) {
 		this.totalScore = totalScore;
 	}
 	public List<Comment> getCommentList() {
@@ -89,5 +90,11 @@ public class Course {
 	}
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
+	}
+	public int getPlayTimes() {
+		return playTimes;
+	}
+	public void setPlayTimes(int playTimes) {
+		this.playTimes = playTimes;
 	}
 }
