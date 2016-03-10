@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.xiaofo1022.moocshit.core.CoreUtil;
 import com.xiaofo1022.moocshit.mapper.CommentMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
+import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
+import com.xiaofo1022.moocshit.model.CourseMasterplan;
 import com.xiaofo1022.moocshit.model.CourseType;
 import com.xiaofo1022.moocshit.model.User;
 
@@ -28,6 +30,8 @@ public class MainController {
 	private CourseTypeMapper courseTypeMapper;
 	@Autowired
 	private CommentMapper commentMapper;
+	@Autowired
+	private CourseMasterplanMapper courseMasterplanMapper;
 	
 	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
 	public String main(HttpServletRequest request, ModelMap modelMap) {
@@ -60,7 +64,6 @@ public class MainController {
 			}
 			modelMap.addAttribute("courseTypeList", courseTypeList);
 			modelMap.addAttribute("courseType", courseType);
-			modelMap.addAttribute("courseList", courseMapper.getCourseListByType(courseType.getId()));
 		}
 	}
 	
@@ -69,9 +72,30 @@ public class MainController {
 		return "register";
 	}
 	
-	@RequestMapping(value="/background", method=RequestMethod.GET)
-	public String background(HttpServletRequest request, ModelMap modelMap) {
-		return "background";
+	@RequestMapping(value="/coursemanage", method=RequestMethod.GET)
+	public String coursemanage(HttpServletRequest request, ModelMap modelMap) {
+		User user = CoreUtil.getLoginUser(request);
+		if (user != null) {
+			modelMap.addAttribute("courseList", courseMasterplanMapper.getPlanListByUser(user.getId()));
+		}
+		return "coursemanage";
+	}
+	
+	@RequestMapping(value="/uploadvideo/{planId}", method=RequestMethod.GET)
+	public String background(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		User user = CoreUtil.getLoginUser(request);
+		if (user != null) {
+			List<CourseMasterplan> planList = courseMasterplanMapper.getPlanListByUser(user.getId());
+			if (planList != null && planList.size() > 0) {
+				CourseMasterplan selectedPlan = courseMasterplanMapper.getCourseMasterplan(planId);
+				if (selectedPlan == null) {
+					selectedPlan = new CourseMasterplan();
+				}
+				modelMap.addAttribute("selectedPlan", selectedPlan);
+				modelMap.addAttribute("planList", planList);
+			}
+		}
+		return "uploadvideo";
 	}
 	
 	@RequestMapping(value="/mycourse", method=RequestMethod.GET)
@@ -96,7 +120,7 @@ public class MainController {
 			modelMap.addAttribute("userId", user == null ? "" : user.getId());
 			modelMap.addAttribute("course", course);
 			modelMap.addAttribute("commentCount", course.getCommentList().size());
-			modelMap.addAttribute("courseList", courseMapper.getCourseListByType(course.getCourseTypeId()));
+			modelMap.addAttribute("courseList", null);
 		}
 		return "coursedetail";
 	}

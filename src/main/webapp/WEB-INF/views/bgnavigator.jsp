@@ -7,23 +7,25 @@
 	</div>
 	<div class="panel-body">
 		<ul class="list-group" style="margin-bottom:0;">
-			<a href="background" class="list-group-item <% if (active != null && active.equals("background")) {%> active <%} %>">
-				课程上传
-			</a>
-			<a href="mycourse" class="list-group-item <% if (active != null && active.equals("mycourse")) {%> active <%} %>">
-				我的课程
-			</a>
-			<a href="myinformation" class="list-group-item <% if (active != null && active.equals("myinformation")) {%> active <%} %>">
-				个人资料
-			</a>
-			<a href="#" class="list-group-item">
+			<a href="<c:url value='/coursemanage'/>" class="list-group-item <% if (active != null && active.equals("coursemanage")) {%> active <%} %>">
 				课程管理
 			</a>
+			<a href="<c:url value='/uploadvideo/0'/>" class="list-group-item <% if (active != null && active.equals("uploadvideo")) {%> active <%} %>">
+				视频上传
+			</a>
+			<!-- 
+			<a href="<c:url value='/mycourse'/>" class="list-group-item <% if (active != null && active.equals("mycourse")) {%> active <%} %>">
+				我的课程
+			</a>
+			-->
 			<a href="#" class="list-group-item">
 				视频审核
 			</a>
 			<a href="#" class="list-group-item">
 				用户管理
+			</a>
+			<a href="<c:url value='/myinformation'/>" class="list-group-item <% if (active != null && active.equals("myinformation")) {%> active <%} %>">
+				个人资料
 			</a>
 			<!-- 
 			<a href="#" class="list-group-item">

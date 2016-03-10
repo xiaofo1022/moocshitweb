@@ -7,5 +7,6 @@
         <mapper resource="com.xiaofo1022.moocshit.mapper.RoleMapper.xml" />
         <mapper resource="com.xiaofo1022.moocshit.mapper.UserMapper.xml" />
         <mapper resource="com.xiaofo1022.moocshit.mapper.CommentMapper.xml" />
+        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.xml" />
     </mappers>
 </configuration>

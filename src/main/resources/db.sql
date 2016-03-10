@@ -89,3 +89,32 @@ CREATE TABLE `comments` (
 -- ----------------------------
 CREATE TRIGGER `COMMENTS_INSERT` BEFORE INSERT ON `comments` FOR EACH ROW SET NEW.INSERT_DATETIME = NOW(), NEW.UPDATE_DATETIME = NOW();
 CREATE TRIGGER `COMMENTS_UPDATE` BEFORE UPDATE ON `comments` FOR EACH ROW SET NEW.UPDATE_DATETIME = NOW();
+
+-- 2016-3-10
+ALTER TABLE `course`
+CHANGE COLUMN `COURSE_TYPE_ID` `COURSE_PLAN_ID`  int(11) NULL DEFAULT 0 AFTER `COURSE_NAME`;
+
+ALTER TABLE `course`
+ADD COLUMN `COURSE_INDEX` int NULL DEFAULT 1 AFTER `PLAY_TIMES`;
+
+-- ----------------------------
+-- Table structure for `course_masterplan`
+-- ----------------------------
+DROP TABLE IF EXISTS `course_masterplan`;
+CREATE TABLE `course_masterplan` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `INSERT_DATETIME` datetime DEFAULT NULL,
+  `UPDATE_DATETIME` datetime DEFAULT NULL,
+  `PLAN_NAME` varchar(255) DEFAULT NULL,
+  `PLAN_PIC_KEY` varchar(255) DEFAULT NULL,
+  `PLAN_DESCRIPTION` varchar(1000) DEFAULT NULL,
+  `PLAN_TYPE` varchar(50) DEFAULT NULL,
+  `UPLOADER_ID` int(11) DEFAULT 0,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course_masterplan
+-- ----------------------------
+CREATE TRIGGER `MASTERPLAN_INSERT` BEFORE INSERT ON `course_masterplan` FOR EACH ROW SET NEW.INSERT_DATETIME = NOW(), NEW.UPDATE_DATETIME = NOW();
+CREATE TRIGGER `MASTERPLAN_UPDATE` BEFORE UPDATE ON `course_masterplan` FOR EACH ROW SET NEW.UPDATE_DATETIME = NOW();

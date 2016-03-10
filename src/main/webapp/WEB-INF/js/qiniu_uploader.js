@@ -7,6 +7,7 @@ function getUploader(uptoken) {
 	    browse_button: 'pickfiles',       //上传选择的点选按钮，**必需**
 	    //uptoken_url: tokenUrl,
 	    uptoken: uptoken,
+	    unique_names: true,
 	    domain: 'http://qiniu-plupload.qiniudn.com/',
 	    container: 'container',           //上传区域DOM ID，默认是browser_button的父元素，
 	    max_file_size: '2048mb',          //最大文件体积限制
@@ -40,7 +41,7 @@ function getUploader(uptoken) {
 	            // }
 	            var domain = up.getOption('domain');
 	            var res = jQuery.parseJSON(info);
-	            $("#course-video-key").val(res.key);
+	            $("#qiniu-key").val(res.key);
 	            $("#pickfiles").text('上传完成');
 	            $("#pickfiles").attr('class', '');
 	            $("#pickfiles").addClass('btn btn-success');

@@ -53,6 +53,10 @@
     	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CommentMapper" />
     	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
+    <bean id="courseMasterplanMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
     <!-- Mappers -->
     
 	<context:component-scan base-package="com.xiaofo1022.moocshit.dao" />

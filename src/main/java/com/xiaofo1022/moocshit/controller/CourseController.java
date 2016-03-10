@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaofo1022.moocshit.core.GlobalData;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
+import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
+import com.xiaofo1022.moocshit.model.CourseMasterplan;
 import com.xiaofo1022.moocshit.model.CourseType;
 import com.xiaofo1022.moocshit.model.User;
 
@@ -26,9 +28,10 @@ public class CourseController {
 
 	@Autowired
 	private CourseMapper courseMapper;
-	
 	@Autowired
 	private CourseTypeMapper courseTypeMapper;
+	@Autowired
+	private CourseMasterplanMapper courseMasterplanMapper;
 	
 	@RequestMapping(value="/allCourseType", method=RequestMethod.GET)
 	@ResponseBody
@@ -66,5 +69,17 @@ public class CourseController {
 	public int addPlayTimes(@PathVariable int courseId) {
 		courseMapper.addPlayTimes(courseId);
 		return GlobalData.SUCCESS_CODE;
+	}
+	
+	@RequestMapping(value="/addCourseMasterplan", method=RequestMethod.POST)
+	@ResponseBody
+	public int addCourseMasterplan(@RequestBody CourseMasterplan courseMasterplan, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			User user = (User)session.getAttribute("user");
+			courseMasterplan.setUploaderId(user.getId());
+		}
+		courseMasterplanMapper.addCourseMasterplan(courseMasterplan);
+		return courseMasterplan.getId();
 	}
 }

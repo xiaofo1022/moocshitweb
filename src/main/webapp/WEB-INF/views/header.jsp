@@ -22,7 +22,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<% if (isLogined) { %>
-					<li <% if (active != null && active.equals("background")) { %> class="active" <% } %>><a href="<c:url value='/background' />">[个人中心 ]</a></li>
+					<li <% if (active != null && active.equals("background")) { %> class="active" <% } %>><a href="<c:url value='/coursemanage' />">[个人中心 ]</a></li>
 					<li><a href="#" onclick="logout()">退出</a></li>
 					<script>
 						function logout() {

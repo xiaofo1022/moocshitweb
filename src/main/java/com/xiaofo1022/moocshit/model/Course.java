@@ -9,8 +9,7 @@ public class Course {
 	private Date insertDatetime;
 	private Date updateDatetime;
 	private String courseName;
-	private long courseTypeId;
-	private CourseType courseType;
+	private long coursePlanId;
 	private String courseVideoKey;
 	private String courseRemark;
 	private long uploadUserId;
@@ -18,6 +17,7 @@ public class Course {
 	private double totalScore;
 	private int playTimes;
 	private List<Comment> commentList;
+	private int courseIndex;
 	
 	public long getId() {
 		return id;
@@ -43,12 +43,6 @@ public class Course {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public long getCourseTypeId() {
-		return courseTypeId;
-	}
-	public void setCourseTypeId(long courseTypeId) {
-		this.courseTypeId = courseTypeId;
-	}
 	public String getCourseVideoKey() {
 		return courseVideoKey;
 	}
@@ -66,12 +60,6 @@ public class Course {
 	}
 	public void setUploadUserId(long uploadUserId) {
 		this.uploadUserId = uploadUserId;
-	}
-	public CourseType getCourseType() {
-		return courseType;
-	}
-	public void setCourseType(CourseType courseType) {
-		this.courseType = courseType;
 	}
 	public User getUploadUser() {
 		return uploadUser;
@@ -96,5 +84,17 @@ public class Course {
 	}
 	public void setPlayTimes(int playTimes) {
 		this.playTimes = playTimes;
+	}
+	public long getCoursePlanId() {
+		return coursePlanId;
+	}
+	public void setCoursePlanId(long coursePlanId) {
+		this.coursePlanId = coursePlanId;
+	}
+	public int getCourseIndex() {
+		return courseIndex;
+	}
+	public void setCourseIndex(int courseIndex) {
+		this.courseIndex = courseIndex;
 	}
 }

@@ -9,17 +9,13 @@
         <result property="insertDatetime" column="INSERT_DATETIME" javaType="java.util.Date"/>
         <result property="updateDatetime" column="UPDATE_DATETIME" javaType="java.util.Date"/>
         <result property="courseName" column="COURSE_NAME" />
-        <result property="courseTypeId" column="COURSE_TYPE_ID" />
+        <result property="coursePlanId" column="COURSE_PLAN_ID" />
         <result property="courseVideoKey" column="COURSE_VIDEO_KEY" />
         <result property="courseRemark" column="COURSE_REMARK" />
         <result property="uploadUserId" column="UPLOAD_USER_ID" />
         <result property="totalScore" column="TOTAL_SCORE" />
         <result property="playTimes" column="PLAY_TIMES" />
-        
-        <association property="courseType" 
-            column="COURSE_TYPE_ID"
-            javaType="com.xiaofo1022.moocshit.model.CourseType"
-            select="selectCourseType" />
+        <result property="courseIndex" column="COURSE_INDEX" />
         
         <association property="uploadUser" 
             column="UPLOAD_USER_ID"
@@ -28,11 +24,6 @@
         
         <collection property="commentList" javaType="ArrayList" column="id" ofType="com.xiaofo1022.moocshit.model.Comment" select="selectComment" />
     </resultMap>
-    
-    <select id="selectCourseType" 
-        resultMap="com.xiaofo1022.moocshit.mapper.CourseTypeMapper.courseTypeMap">
-        SELECT * FROM COURSE_TYPE WHERE ID = #{id}
-    </select>
     
     <select id="selectUser" 
         resultMap="com.xiaofo1022.moocshit.mapper.UserMapper.userMap">
