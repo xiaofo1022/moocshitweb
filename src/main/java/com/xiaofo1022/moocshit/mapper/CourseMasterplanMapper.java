@@ -20,6 +20,14 @@ public interface CourseMasterplanMapper {
 	@ResultMap("courseMasterplanMap")
 	List<CourseMasterplan> getPlanListByUser(@Param("userId") int userId);
 	
+	@Select("SELECT * FROM COURSE_MASTERPLAN ORDER BY INSERT_DATETIME DESC")
+	@ResultMap("courseMasterplanMap")
+	List<CourseMasterplan> getAllPlanList();
+	
+	@Select("SELECT * FROM COURSE_MASTERPLAN WHERE PLAN_TYPE = #{planType} ORDER BY INSERT_DATETIME DESC")
+	@ResultMap("courseMasterplanMap")
+	List<CourseMasterplan> getPlanListByType(@Param("planType") String planType);
+	
 	@Select("SELECT * FROM COURSE_MASTERPLAN WHERE ID = #{id}")
 	@ResultMap("courseMasterplanMap")
 	CourseMasterplan getCourseMasterplan(@Param("id") int id);

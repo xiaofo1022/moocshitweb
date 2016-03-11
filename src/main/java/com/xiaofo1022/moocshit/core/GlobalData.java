@@ -4,4 +4,5 @@ public class GlobalData {
 
 	public static final int SUCCESS_CODE = 1;
 	public static final int FAILURE_CODE = 0;
+	public static final String ALL_TYPE = "È«²¿";
 }

@@ -1,5 +1,6 @@
 package com.xiaofo1022.moocshit.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xiaofo1022.moocshit.core.CoreUtil;
+import com.xiaofo1022.moocshit.core.GlobalData;
+import com.xiaofo1022.moocshit.dao.CourseTypeDao;
 import com.xiaofo1022.moocshit.mapper.CommentMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
@@ -32,6 +35,8 @@ public class MainController {
 	private CommentMapper commentMapper;
 	@Autowired
 	private CourseMasterplanMapper courseMasterplanMapper;
+	@Autowired
+	private CourseTypeDao courseTypeDao;
 	
 	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
 	public String main(HttpServletRequest request, ModelMap modelMap) {
@@ -42,34 +47,38 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/course", method=RequestMethod.GET)
-	public String course(HttpServletRequest request, ModelMap modelMap) {
-		fillCourseModelMap(0, modelMap);
-		return "course";
-	}
-	
-	@RequestMapping(value="/course/{courseTypeId}", method=RequestMethod.GET)
-	public String courseByType(@PathVariable int courseTypeId, HttpServletRequest request, ModelMap modelMap) {
-		fillCourseModelMap(courseTypeId, modelMap);
-		return "course";
-	}
-	
-	private void fillCourseModelMap(int courseTypeId, ModelMap modelMap) {
-		List<CourseType> courseTypeList = courseTypeMapper.getAllCourseType();
-		if (courseTypeList != null && courseTypeList.size() > 0) {
-			CourseType courseType = null;
-			if (courseTypeId == 0) {
-				courseType = courseTypeList.get(0);
-			} else {
-				courseType = courseTypeMapper.getCourseType(courseTypeId);
-			}
-			modelMap.addAttribute("courseTypeList", courseTypeList);
-			modelMap.addAttribute("courseType", courseType);
+	public String course(HttpServletRequest request, ModelMap modelMap) throws UnsupportedEncodingException {
+		List<CourseType> courseTypeList = courseTypeDao.getAllCourseType();
+		modelMap.addAttribute("courseTypeList", courseTypeList);
+		
+		String typeName = request.getParameter("typeName");
+		if (typeName != null) {
+			typeName = new String(typeName.getBytes("ISO-8859-1"), "UTF-8");
 		}
+		if (typeName != null && !typeName.equals("") && !typeName.equals(GlobalData.ALL_TYPE)) {
+			modelMap.addAttribute("selectedType", typeName);
+			modelMap.addAttribute("courseList", courseMasterplanMapper.getPlanListByType(typeName));
+		} else {
+			modelMap.addAttribute("selectedType", GlobalData.ALL_TYPE);
+			modelMap.addAttribute("courseList", courseMasterplanMapper.getAllPlanList());
+		}
+		
+		return "course";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String register(HttpServletRequest request, ModelMap modelMap) {
 		return "register";
+	}
+	
+	@RequestMapping(value="/courseintro/{planId}", method=RequestMethod.GET)
+	public String courseintro(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		CourseMasterplan masterplan = courseMasterplanMapper.getCourseMasterplan(planId);
+		if (masterplan != null) {
+			masterplan.setCourseList(courseMapper.getCourseListByPlan(planId));
+		}
+		modelMap.addAttribute("masterplan", masterplan);
+		return "courseintro";
 	}
 	
 	@RequestMapping(value="/coursemanage", method=RequestMethod.GET)

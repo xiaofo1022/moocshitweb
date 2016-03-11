@@ -16,7 +16,7 @@ public interface CourseTypeMapper {
 	@ResultMap(value="courseTypeMap")
 	CourseType getCourseType(@Param("ID") long id);
 	
-	@Select("SELECT * FROM COURSE_TYPE ORDER BY ID")
+	@Select("SELECT DISTINCT(PLAN_TYPE) AS COURSE_TYPE_NAME FROM COURSE_MASTERPLAN")
 	@ResultMap(value="courseTypeMap")
 	List<CourseType> getAllCourseType();
 	

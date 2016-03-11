@@ -25,6 +25,10 @@ public interface CourseMapper {
 	@ResultMap(value="courseMap")
 	List<Course> getAllCourse();
 	
+	@Select("SELECT * FROM COURSE WHERE COURSE_PLAN_ID = #{planId} ORDER BY COURSE_INDEX")
+	@ResultMap(value="courseMap")
+	List<Course> getCourseListByPlan(@Param("planId") int planId);
+	
 	@Update("UPDATE COURSE SET TOTAL_SCORE = ${totalScore} WHERE ID = ${id}")
 	int updateCourseScore(@Param("totalScore") double totalScore, @Param("id") long id);
 	

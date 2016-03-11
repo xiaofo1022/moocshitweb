@@ -1,6 +1,7 @@
 package com.xiaofo1022.moocshit.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class CourseMasterplan {
 
@@ -14,6 +15,7 @@ public class CourseMasterplan {
 	private int uploaderId;
 	private User uploader;
 	private int courseCount;
+	private List<Course> courseList;
 	
 	public int getId() {
 		return id;
@@ -77,5 +79,11 @@ public class CourseMasterplan {
 	}
 	public void setCourseCount(int courseCount) {
 		this.courseCount = courseCount;
+	}
+	public List<Course> getCourseList() {
+		return courseList;
+	}
+	public void setCourseList(List<Course> courseList) {
+		this.courseList = courseList;
 	}
 }

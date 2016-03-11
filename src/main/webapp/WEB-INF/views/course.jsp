@@ -23,13 +23,14 @@
 <div class="outer-block clearfix" style="position:relative;margin-bottom:0;">
 	<div class="course-category clearfix">
 		<div class="course-block clearfix">
+			<span class="fleft" style="margin-top:6px;">课程分类：</span>
 			<c:forEach items="${courseTypeList}" var="typeItem">
 				<c:choose>
-					<c:when test="${typeItem.id == courseType.id}">
+					<c:when test="${typeItem.typeName == selectedType}">
 						<p class="active">${typeItem.typeName}</p>
 					</c:when>
 					<c:otherwise>
-						<p onclick="changeCourseType(${typeItem.id})">${typeItem.typeName}</p>
+						<p onclick="changeCourseType('${typeItem.typeName}')">${typeItem.typeName}</p>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -38,11 +39,15 @@
 	
 	<div class="row-course">
 		<c:forEach items="${courseList}" var="course" varStatus="status">
-			<div class="fleft class-all-list">
-				<div class="class-block" onclick="courseDetail(${course.id})">
-					<img src="<c:url value='/images/class-1.jpg' />"/>
-					<h5>${course.courseName}：第${status.index + 1}课</h5>
-				</div>
+			<div class="fleft class-block course-outer" onclick="courseIntro(${course.id})">
+				<div class="course-pic" style="background-image:url(http://7xrbxj.com1.z0.glb.clouddn.com/${course.planPicKey});"></div>
+				<p style="padding-top:10px;">
+					<span style="font-weight:bold;">课程：${course.planName}</span>
+					<span>(共 ${course.courseCount} 课时)</span>
+				</p>
+				<p>
+					<span>简介：${course.planDescription}</span>
+				</p>
 			</div>
 		</c:forEach>
 	</div>
@@ -57,15 +62,6 @@
 				</a>
 			</li>
 			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-			<li><a href="#">8</a></li>
-			<li><a href="#">9</a></li>
-			<li><a href="#">10</a></li>
 			<li>
 				<a href="#" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
@@ -80,12 +76,12 @@
 <script>
 	var baseUrl = "<c:url value='/'/>";
 
-	function changeCourseType(courseTypeId) {
-		location.assign(baseUrl + 'course/' + courseTypeId);
+	function changeCourseType(typeName) {
+		location.assign(encodeURI(baseUrl + 'course?typeName=' + typeName));
 	}
 	
-	function courseDetail(courseId) {
-		location.assign(baseUrl + 'courseDetail/' + courseId);
+	function courseIntro(courseId) {
+		location.assign(baseUrl + 'courseintro/' + courseId);
 	}
 </script>
 </body>
