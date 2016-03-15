@@ -89,7 +89,7 @@
 		
 		<div class="clearfix course-row">
 			<c:forEach items="${courseList}" var="course">
-				<div class="fleft class-block course-block">
+				<div class="fleft class-block course-block" onclick="toCourseEdit(${course.id})">
 					<div class="course-pic" style="background-image:url(http://7xrbxj.com1.z0.glb.clouddn.com/${course.planPicKey});"></div>
 					<p style="padding-top:10px;">
 						<span>课程：${course.planName}</span>
@@ -120,6 +120,10 @@
 	
 	function toUploadVideo(planId) {
 		location.assign('<c:url value="/uploadvideo/' + planId + '"/>');
+	}
+	
+	function toCourseEdit(planId) {
+		location.assign('<c:url value="/courseedit/' + planId + '"/>');
 	}
 </script>
 </body>

@@ -6,18 +6,16 @@
 		个人中心
 	</div>
 	<div class="panel-body">
-		<ul class="list-group" style="margin-bottom:0;">
+		<ul class="list-group" style="margin-bottom:0;text-align:left;">
 			<a href="<c:url value='/coursemanage'/>" class="list-group-item <% if (active != null && active.equals("coursemanage")) {%> active <%} %>">
 				课程管理
 			</a>
 			<a href="<c:url value='/uploadvideo/0'/>" class="list-group-item <% if (active != null && active.equals("uploadvideo")) {%> active <%} %>">
 				视频上传
 			</a>
-			<!-- 
-			<a href="<c:url value='/mycourse'/>" class="list-group-item <% if (active != null && active.equals("mycourse")) {%> active <%} %>">
-				我的课程
+			<a href="<c:url value='/chosenstatus'/>" class="list-group-item <% if (active != null && active.equals("chosen")) {%> active <%} %>">
+				选课情况
 			</a>
-			-->
 			<a href="#" class="list-group-item">
 				视频审核
 			</a>

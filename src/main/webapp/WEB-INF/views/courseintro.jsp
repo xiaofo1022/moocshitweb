@@ -39,10 +39,10 @@
 <input type="hidden" value="${userId}" id="user_id" />
 <input type="hidden" value="${planId}" id="plan_id" />
 
-<div class="outer-block clearfix" style="position:relative;margin-bottom:0;margin-top:0;">
+<div class="outer-block clearfix intro-outer">
 	<div class="course-category clearfix" style="border-top-width:0;padding:10px 0 10px 0;">
 		<div class="fleft" style="text-align:left;">
-			<h1>课程简介</h1>
+			<h1 class="main-color">课程简介</h1>
 			<p style="font-size:16px;color:#787D82;">${masterplan.planDescription}</p>
 		</div>
 		<div class="fright" style="padding-top:15px;">

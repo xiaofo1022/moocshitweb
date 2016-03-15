@@ -76,6 +76,17 @@ public class MainController {
 	
 	@RequestMapping(value="/courseintro/{planId}", method=RequestMethod.GET)
 	public String courseintro(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		fillCourseIntroModelmap(planId, request, modelMap);
+		return "courseintro";
+	}
+	
+	@RequestMapping(value="/courseedit/{planId}", method=RequestMethod.GET)
+	public String courseedit(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		fillCourseIntroModelmap(planId, request, modelMap);
+		return "courseedit";
+	}
+	
+	public void fillCourseIntroModelmap(int planId, HttpServletRequest request, ModelMap modelMap) {
 		CourseMasterplan masterplan = courseMasterplanMapper.getCourseMasterplan(planId);
 		if (masterplan != null) {
 			masterplan.setCourseList(courseMapper.getCourseListByPlan(planId));
@@ -88,7 +99,11 @@ public class MainController {
 		}
 		modelMap.addAttribute("chosenCount", chosenMapper.getChosenCount(planId));
 		modelMap.addAttribute("planId", planId);
-		return "courseintro";
+	}
+	
+	@RequestMapping(value="/chosenstatus", method=RequestMethod.GET)
+	public String chosenstatus(HttpServletRequest request, ModelMap modelMap) {
+		return "chosenstatus";
 	}
 	
 	@RequestMapping(value="/coursemanage", method=RequestMethod.GET)
