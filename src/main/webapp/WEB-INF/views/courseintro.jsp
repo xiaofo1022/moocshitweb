@@ -36,6 +36,9 @@
 	<jsp:param value="course" name="active" />
 </jsp:include>
 
+<input type="hidden" value="${userId}" id="user_id" />
+<input type="hidden" value="${planId}" id="plan_id" />
+
 <div class="outer-block clearfix" style="position:relative;margin-bottom:0;margin-top:0;">
 	<div class="course-category clearfix" style="border-top-width:0;padding:10px 0 10px 0;">
 		<div class="fleft" style="text-align:left;">
@@ -43,8 +46,15 @@
 			<p style="font-size:16px;color:#787D82;">${masterplan.planDescription}</p>
 		</div>
 		<div class="fright" style="padding-top:15px;">
-			<button class="btn btn-danger btn-lg" style="border-radius:0px;">选修此课</button>
-			<p style="margin-top:10px;">[已有 <span style="color:#D9534F;">18</span> 人选修]</p>
+			<c:choose>
+				<c:when test="${isChosen}">
+					<button class="btn btn-success btn-lg" disabled style="border-radius:0px;">等待开课</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btn btn-danger btn-lg" style="border-radius:0px;" onclick="choseThisCourse()">选修此课</button>
+				</c:otherwise>
+			</c:choose>
+			<p style="margin-top:10px;">[已有 <span style="color:#D9534F;">${chosenCount}</span> 人选修]</p>
 		</div>
 	</div>
 </div>
@@ -69,6 +79,19 @@
 
 <script>
 
+	function choseThisCourse() {
+		if (!$('#user_id').val()) {
+			alert('请先登录');
+			return;
+		}
+		var yes = confirm('是否确认选修此课？');
+		var planId = $('#plan_id').val();
+		if (yes) {
+			$.post('<c:url value="/chosen/addCourseChosen/' + planId + '" />', null, function(data) {
+				location.reload();
+			});
+		}
+	}
 </script>
 </body>
 </html>

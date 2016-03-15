@@ -8,5 +8,6 @@
         <mapper resource="com.xiaofo1022.moocshit.mapper.UserMapper.xml" />
         <mapper resource="com.xiaofo1022.moocshit.mapper.CommentMapper.xml" />
         <mapper resource="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.xml" />
+        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseChosenMapper.xml" />
     </mappers>
 </configuration>

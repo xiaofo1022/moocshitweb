@@ -16,6 +16,7 @@ import com.xiaofo1022.moocshit.core.CoreUtil;
 import com.xiaofo1022.moocshit.core.GlobalData;
 import com.xiaofo1022.moocshit.dao.CourseTypeDao;
 import com.xiaofo1022.moocshit.mapper.CommentMapper;
+import com.xiaofo1022.moocshit.mapper.CourseChosenMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
@@ -37,6 +38,8 @@ public class MainController {
 	private CourseMasterplanMapper courseMasterplanMapper;
 	@Autowired
 	private CourseTypeDao courseTypeDao;
+	@Autowired
+	private CourseChosenMapper chosenMapper;
 	
 	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
 	public String main(HttpServletRequest request, ModelMap modelMap) {
@@ -78,6 +81,13 @@ public class MainController {
 			masterplan.setCourseList(courseMapper.getCourseListByPlan(planId));
 		}
 		modelMap.addAttribute("masterplan", masterplan);
+		User user = CoreUtil.getLoginUser(request);
+		if (user != null) {
+			modelMap.addAttribute("userId", user.getId());
+			modelMap.addAttribute("isChosen", chosenMapper.isChosen(planId, user.getId()) > 0);
+		}
+		modelMap.addAttribute("chosenCount", chosenMapper.getChosenCount(planId));
+		modelMap.addAttribute("planId", planId);
 		return "courseintro";
 	}
 	

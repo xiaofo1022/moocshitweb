@@ -118,3 +118,25 @@ CREATE TABLE `course_masterplan` (
 -- ----------------------------
 CREATE TRIGGER `MASTERPLAN_INSERT` BEFORE INSERT ON `course_masterplan` FOR EACH ROW SET NEW.INSERT_DATETIME = NOW(), NEW.UPDATE_DATETIME = NOW();
 CREATE TRIGGER `MASTERPLAN_UPDATE` BEFORE UPDATE ON `course_masterplan` FOR EACH ROW SET NEW.UPDATE_DATETIME = NOW();
+
+-- 2016-3-15
+
+-- ----------------------------
+-- Table structure for `course_chosen`
+-- ----------------------------
+DROP TABLE IF EXISTS `course_chosen`;
+CREATE TABLE `course_chosen` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `INSERT_DATETIME` datetime DEFAULT NULL,
+  `UPDATE_DATETIME` datetime DEFAULT NULL,
+  `COURSE_PLAN_ID` int(11) DEFAULT 0,
+  `STUDENT_ID` int(11) DEFAULT 0,
+  `IS_START` tinyint(4) DEFAULT 0,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course_chosen
+-- ----------------------------
+CREATE TRIGGER `COURSE_CHOSEN_INSERT` BEFORE INSERT ON `course_chosen` FOR EACH ROW SET NEW.INSERT_DATETIME = NOW(), NEW.UPDATE_DATETIME = NOW();
+CREATE TRIGGER `COURSE_CHOSEN_UPDATE` BEFORE UPDATE ON `course_chosen` FOR EACH ROW SET NEW.UPDATE_DATETIME = NOW();
