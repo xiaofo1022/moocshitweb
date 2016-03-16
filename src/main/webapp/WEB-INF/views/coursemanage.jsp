@@ -89,8 +89,8 @@
 		
 		<div class="clearfix course-row">
 			<c:forEach items="${courseList}" var="course">
-				<div class="fleft class-block course-block" onclick="toCourseEdit(${course.id})">
-					<div class="course-pic" style="background-image:url(http://7xrbxj.com1.z0.glb.clouddn.com/${course.planPicKey});"></div>
+				<div class="fleft class-block course-block">
+					<div onclick="toCourseEdit(${course.id})" class="course-pic" style="background-image:url(http://7xrbxj.com1.z0.glb.clouddn.com/${course.planPicKey});"></div>
 					<p style="padding-top:10px;">
 						<span>课程：${course.planName}</span>
 						<span>(共 ${course.courseCount} 课时)</span>

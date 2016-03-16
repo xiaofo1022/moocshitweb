@@ -5,4 +5,6 @@ public class GlobalData {
 	public static final int SUCCESS_CODE = 1;
 	public static final int FAILURE_CODE = 0;
 	public static final String ALL_TYPE = "全部";
+	public static final int IS_START = 1;
+	public static final int NOT_START = 0;
 }

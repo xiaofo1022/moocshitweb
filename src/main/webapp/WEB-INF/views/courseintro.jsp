@@ -47,6 +47,11 @@
 		</div>
 		<div class="fright" style="padding-top:15px;">
 			<c:choose>
+				<c:when test="${isStart}">
+					<button class="btn btn-info btn-lg" style="border-radius:0px;" onclick="toCourseDetail(${masterplan.id})">
+						已开课 去上课 &gt;
+					</button>
+				</c:when>
 				<c:when test="${isChosen}">
 					<button class="btn btn-success btn-lg" disabled style="border-radius:0px;">等待开课</button>
 				</c:when>
@@ -78,7 +83,6 @@
 <jsp:include page="footer.jsp"></jsp:include>
 
 <script>
-
 	function choseThisCourse() {
 		if (!$('#user_id').val()) {
 			alert('请先登录');
@@ -91,6 +95,10 @@
 				location.reload();
 			});
 		}
+	}
+	
+	function toCourseDetail(planId) {
+		location.assign('<c:url value="/courseDetail/' + planId + '" />');
 	}
 </script>
 </body>

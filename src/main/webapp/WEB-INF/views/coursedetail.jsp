@@ -32,7 +32,7 @@
 			</video>
 			<div class="video-bar clearfix">
 				<p class="fleft" ng-model="course">
-					${course.courseType.typeName} : ${course.courseName}
+					${coursePlan.planName} : ${course.courseName}
 				</p>
 				<p class="fright">
 					评分：
@@ -69,13 +69,13 @@
 								<c:when test="${courseItem.id == course.id}">
 									<li class="list-group-item active">
 										第${status.index + 1}课：${courseItem.courseName}
-										<span style="float:right;">44:56</span>
+										<span style="float:right;"></span>
 									</li>
 								</c:when>
 								<c:otherwise>
 									<li class="list-group-item">
 										第${status.index + 1}课：${courseItem.courseName}
-										<span style="float:right;">44:56</span>
+										<span style="float:right;"></span>
 									</li>
 								</c:otherwise>
 							</c:choose>

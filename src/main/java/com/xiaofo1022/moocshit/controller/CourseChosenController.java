@@ -5,11 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaofo1022.moocshit.core.CoreUtil;
+import com.xiaofo1022.moocshit.core.GlobalData;
 import com.xiaofo1022.moocshit.mapper.CourseChosenMapper;
 import com.xiaofo1022.moocshit.model.CourseChosen;
 import com.xiaofo1022.moocshit.model.User;
@@ -32,7 +34,13 @@ public class CourseChosenController {
 			chosenMapper.addCourseChosen(chosen);
 			return chosen.getId();
 		} else {
-			return 0;
+			return GlobalData.FAILURE_CODE;
 		}
+	}
+	
+	@RequestMapping(value="/startCourse", method=RequestMethod.POST)
+	@ResponseBody
+	int startCourse(@RequestBody CourseChosen chosen, HttpServletRequest request) {
+		return chosenMapper.startCourse(chosen);
 	}
 }

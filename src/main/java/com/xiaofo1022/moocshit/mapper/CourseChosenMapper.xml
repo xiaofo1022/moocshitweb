@@ -11,6 +11,17 @@
         <result property="coursePlanId" column="COURSE_PLAN_ID" />
         <result property="studentId" column="STUDENT_ID" />
         <result property="isStart" column="IS_START" />
+        <result property="studyProgress" column="STUDY_PROGRESS" />
+        <result property="deadLineDate" column="DEAD_LINE_DATE" javaType="java.util.Date"/>
+        
+        <association property="courseMasterplan" 
+            column="COURSE_PLAN_ID"
+            javaType="com.xiaofo1022.moocshit.model.CourseMasterplan"
+            select="selectCourseMasterplan" />
 	</resultMap>
 	
+    <select id="selectCourseMasterplan" 
+        resultMap="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.courseMasterplanMap">
+        SELECT * FROM COURSE_MASTERPLAN WHERE ID = #{id}
+    </select>
 </mapper>

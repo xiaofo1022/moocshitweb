@@ -21,6 +21,7 @@ import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
+import com.xiaofo1022.moocshit.model.CourseChosen;
 import com.xiaofo1022.moocshit.model.CourseMasterplan;
 import com.xiaofo1022.moocshit.model.CourseType;
 import com.xiaofo1022.moocshit.model.User;
@@ -96,13 +97,21 @@ public class MainController {
 		if (user != null) {
 			modelMap.addAttribute("userId", user.getId());
 			modelMap.addAttribute("isChosen", chosenMapper.isChosen(planId, user.getId()) > 0);
+			modelMap.addAttribute("isStart", chosenMapper.isStart(planId, user.getId()) > 0);
 		}
-		modelMap.addAttribute("chosenCount", chosenMapper.getChosenCount(planId));
+		modelMap.addAttribute("chosenCount", chosenMapper.getStudentCount(planId));
 		modelMap.addAttribute("planId", planId);
 	}
 	
 	@RequestMapping(value="/chosenstatus", method=RequestMethod.GET)
 	public String chosenstatus(HttpServletRequest request, ModelMap modelMap) {
+		List<CourseChosen> chosenStatusList = chosenMapper.getChosenStatusList();
+		if (chosenStatusList != null && chosenStatusList.size() > 0) {
+			for (CourseChosen chosen : chosenStatusList) {
+				chosen.setStudentCount(chosenMapper.getChosenCount(chosen.getCoursePlanId(), chosen.getIsStart()));
+			}
+		}
+		modelMap.addAttribute("chosenStatusList", chosenStatusList);
 		return "chosenstatus";
 	}
 	
@@ -146,15 +155,29 @@ public class MainController {
 		return "myinformation";
 	}
 	
-	@RequestMapping(value="/courseDetail/{courseId}", method=RequestMethod.GET)
-	public String courseDetail(@PathVariable int courseId, HttpServletRequest request, ModelMap modelMap) {
-		Course course = courseMapper.getCourse(courseId);
-		if (course != null) {
+	@RequestMapping(value="/courseDetail/{planId}", method=RequestMethod.GET)
+	public String courseDetail(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		CourseMasterplan courseMasterplan = courseMasterplanMapper.getCourseMasterplan(planId);
+		if (courseMasterplan != null) {
 			User user = CoreUtil.getLoginUser(request);
-			modelMap.addAttribute("userId", user == null ? "" : user.getId());
-			modelMap.addAttribute("course", course);
-			modelMap.addAttribute("commentCount", course.getCommentList().size());
-			modelMap.addAttribute("courseList", null);
+			if (user != null) {
+				courseMasterplan.setCourseList(courseMapper.getCourseListByPlan(planId));
+				modelMap.addAttribute("userId", user.getId());
+				List<Course> courseList = courseMasterplan.getCourseList();
+				if (courseList != null && courseList.size() > 0) {
+					int courseIndex = chosenMapper.getStudyProgress(planId, user.getId());
+					if (courseIndex > 0) {
+						courseIndex = courseIndex - 1;
+					}
+					Course course = courseList.get(courseIndex);
+					if (course != null) {
+						modelMap.addAttribute("course", course);
+						modelMap.addAttribute("commentCount", course.getCommentList().size());
+					}
+					modelMap.addAttribute("courseList", courseList);
+				}
+			}
+			modelMap.addAttribute("coursePlan", courseMasterplan);
 		}
 		return "coursedetail";
 	}

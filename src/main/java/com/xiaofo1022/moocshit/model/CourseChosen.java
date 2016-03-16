@@ -1,5 +1,7 @@
 package com.xiaofo1022.moocshit.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CourseChosen {
@@ -12,6 +14,11 @@ public class CourseChosen {
 	private int studentId;
 	private User student;
 	private int isStart;
+	private int studyProgress;
+	private int studentCount;
+	private Date deadLineDate;
+	private String deadLine;
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 	
 	public int getId() {
 		return id;
@@ -60,5 +67,39 @@ public class CourseChosen {
 	}
 	public void setIsStart(int isStart) {
 		this.isStart = isStart;
+	}
+	public int getStudyProgress() {
+		return studyProgress;
+	}
+	public void setStudyProgress(int studyProgress) {
+		this.studyProgress = studyProgress;
+	}
+	public Date getDeadLineDate() {
+		return deadLineDate;
+	}
+	public void setDeadLineDate(Date deadLineDate) {
+		this.deadLineDate = deadLineDate;
+	}
+	public int getStudentCount() {
+		return studentCount;
+	}
+	public void setStudentCount(int studentCount) {
+		this.studentCount = studentCount;
+	}
+	public String getDeadLine() {
+		if (this.deadLineDate != null) {
+			return sdf.format(this.deadLineDate);
+		}
+		return deadLine;
+	}
+	public void setDeadLine(String deadLine) {
+		this.deadLine = deadLine;
+		if (this.deadLine != null) {
+			try {
+				this.deadLineDate = sdf.parse(this.deadLine);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
