@@ -46,4 +46,7 @@ public interface CourseMapper {
 	@Select("SELECT * FROM COURSE ORDER BY UPDATE_DATETIME DESC LIMIT 0, 3")
 	@ResultMap(value="courseMap")
 	List<Course> getLatestCourseList();
+	
+	@Select("SELECT COURSE_INDEX FROM COURSE WHERE COURSE_PLAN_ID = #{planId} ORDER BY COURSE_INDEX DESC LIMIT 0, 1")
+	int getMaxCourseIndex(@Param("planId") int planId);
 }

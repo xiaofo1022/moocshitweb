@@ -22,6 +22,7 @@
 
 <input id="course_id" type="hidden" value="${course.id}"/>
 <input id="user_id" type="hidden" value="${userId}"/>
+<input id="course_plan_id" type="hidden" value="${course.coursePlanId}"/>
 
 <div class="container">
 <div class="row" style="margin:60px 0;">
@@ -69,13 +70,39 @@
 								<c:when test="${courseItem.id == course.id}">
 									<li class="list-group-item active">
 										第${status.index + 1}课：${courseItem.courseName}
-										<span style="float:right;"></span>
+										<c:choose>
+											<c:when test="${courseItem.courseIndex == lastCourseIndex}">
+												<span style="float:right;">[已修]</span>
+											</c:when>
+											<c:when test="${courseItem.courseIndex == studyProgress}">
+												<span style="float:right;">[学习中]</span>
+											</c:when>
+											<c:when test="${courseItem.courseIndex < studyProgress}">
+												<span style="float:right;">[已修]</span>
+											</c:when>
+											<c:otherwise>
+												<span style="float:right;">[未修]</span>
+											</c:otherwise>
+										</c:choose>
 									</li>
 								</c:when>
 								<c:otherwise>
-									<li class="list-group-item">
+									<li class="list-group-item" onclick="toSelectedCourse(this, ${courseItem.id})">
 										第${status.index + 1}课：${courseItem.courseName}
-										<span style="float:right;"></span>
+										<c:choose>
+											<c:when test="${courseItem.courseIndex == lastCourseIndex}">
+												<span style="float:right;">[已修]</span>
+											</c:when>
+											<c:when test="${courseItem.courseIndex == studyProgress}">
+												<span style="float:right;">[学习中]</span>
+											</c:when>
+											<c:when test="${courseItem.courseIndex < studyProgress}">
+												<span style="float:right;">[已修]</span>
+											</c:when>
+											<c:otherwise>
+												<span style="float:right;">[未修]</span>
+											</c:otherwise>
+										</c:choose>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -169,6 +196,22 @@
 			});
 		}
 	});
+	
+	var planId = $('#course_plan_id').val();
+	
+	$('#video').bind('ended', function(event) {
+		$.get('<c:url value="/chosen/studyComplete/' + planId + '"/>', function(data) {
+			location.reload();
+		});
+	});
+	
+	function toSelectedCourse(element, courseId) {
+		var span = $(element).find('span');
+		var text = span.text();
+		if (text == '[已修]' || text == '[学习中]') {
+			location.assign('<c:url value="/courseDetail/' + planId + '/' + courseId + '"/>');
+		}
+	}
 </script>
 </body>
 </html>

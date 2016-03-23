@@ -20,7 +20,6 @@ public class CourseDaoTest {
 	@Autowired
 	private CourseTypeMapper courseTypeMapper;
 	
-	@Test
 	public void testCourseDao() {
 		Course course = courseMapper.getCourse(1);
 		Assert.assertNotNull(course);
@@ -29,5 +28,11 @@ public class CourseDaoTest {
 		//CourseType courseType = courseTypeMapper.getCourseType(course.getCourseTypeId());
 		//Assert.assertNotNull(courseType.getTypeName());
 		//Assert.assertNotNull(course.getCourseType().getTypeName());
+	}
+	
+	@Test
+	public void testDivide() {
+		double d = 2.0 / 3.0;
+		Assert.assertNotSame(d, 0);
 	}
 }

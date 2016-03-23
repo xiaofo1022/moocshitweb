@@ -18,10 +18,20 @@
             column="COURSE_PLAN_ID"
             javaType="com.xiaofo1022.moocshit.model.CourseMasterplan"
             select="selectCourseMasterplan" />
+        
+        <association property="student" 
+            column="STUDENT_ID"
+            javaType="com.xiaofo1022.moocshit.model.User"
+            select="selectStudent" />
 	</resultMap>
 	
     <select id="selectCourseMasterplan" 
         resultMap="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.courseMasterplanMap">
         SELECT * FROM COURSE_MASTERPLAN WHERE ID = #{id}
+    </select>
+    
+    <select id="selectStudent" 
+        resultMap="com.xiaofo1022.moocshit.mapper.UserMapper.userMap">
+        SELECT * FROM USERS WHERE ID = #{id}
     </select>
 </mapper>

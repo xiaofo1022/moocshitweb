@@ -1,6 +1,7 @@
 package com.xiaofo1022.moocshit.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -157,6 +158,17 @@ public class MainController {
 	
 	@RequestMapping(value="/courseDetail/{planId}", method=RequestMethod.GET)
 	public String courseDetail(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		fillCourseDetailMap(planId, GlobalData.EMPTY_COURSE_ID, request, modelMap);
+		return "coursedetail";
+	}
+	
+	@RequestMapping(value="/courseDetail/{planId}/{courseId}", method=RequestMethod.GET)
+	public String courseDetailById(@PathVariable int planId, @PathVariable int courseId, HttpServletRequest request, ModelMap modelMap) {
+		fillCourseDetailMap(planId, courseId, request, modelMap);
+		return "coursedetail";
+	}
+	
+	private void fillCourseDetailMap(int planId, int selectedCourseId, HttpServletRequest request, ModelMap modelMap) {
 		CourseMasterplan courseMasterplan = courseMasterplanMapper.getCourseMasterplan(planId);
 		if (courseMasterplan != null) {
 			User user = CoreUtil.getLoginUser(request);
@@ -166,10 +178,22 @@ public class MainController {
 				List<Course> courseList = courseMasterplan.getCourseList();
 				if (courseList != null && courseList.size() > 0) {
 					int courseIndex = chosenMapper.getStudyProgress(planId, user.getId());
+					modelMap.addAttribute("studyProgress", courseIndex);
+					modelMap.addAttribute("lastCourseIndex", courseList.size() + 1);
 					if (courseIndex > 0) {
 						courseIndex = courseIndex - 1;
 					}
-					Course course = courseList.get(courseIndex);
+					Course course = null;
+					if (selectedCourseId > 0) {
+						for (Course tc : courseList) {
+							if (tc.getId() == selectedCourseId) {
+								course = tc;
+								break;
+							}
+						}
+					} else {
+						course = courseList.get(courseIndex);
+					}
 					if (course != null) {
 						modelMap.addAttribute("course", course);
 						modelMap.addAttribute("commentCount", course.getCommentList().size());
@@ -179,6 +203,31 @@ public class MainController {
 			}
 			modelMap.addAttribute("coursePlan", courseMasterplan);
 		}
-		return "coursedetail";
+	}
+	
+	@RequestMapping(value="/studyprogress", method=RequestMethod.GET)
+	public String studyProgress(HttpServletRequest request, ModelMap modelMap) {
+		List<Integer> studyPlanIdList = chosenMapper.getStudyPlanIdList();
+		List<CourseMasterplan> planList = new ArrayList<>();
+		if (studyPlanIdList != null && studyPlanIdList.size() > 0) {
+			for (Integer studyPlanId : studyPlanIdList) {
+				planList.add(courseMasterplanMapper.getCourseMasterplan(studyPlanId));
+			}
+		}
+		if (planList.size() > 0) {
+			CourseMasterplan selectedPlan = planList.get(0);
+			if (selectedPlan != null) {
+				List<CourseChosen> chosenList = chosenMapper.getChosenListByPlan(selectedPlan.getId());
+				int maxCourseIndex = courseMapper.getMaxCourseIndex(selectedPlan.getId());
+				for (CourseChosen chosen : chosenList) {
+					chosen.setStudyPercent(maxCourseIndex);
+				}
+				modelMap.addAttribute("maxCourseIndex", maxCourseIndex);
+				modelMap.addAttribute("chosenList", chosenList);
+				modelMap.addAttribute("selectedPlan", selectedPlan);
+			}
+		}
+		modelMap.addAttribute("planList", planList);
+		return "studyprogress";
 	}
 }

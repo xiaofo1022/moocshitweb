@@ -19,6 +19,7 @@ public class CourseChosen {
 	private Date deadLineDate;
 	private String deadLine;
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	private int studyPercent;
 	
 	public int getId() {
 		return id;
@@ -101,5 +102,12 @@ public class CourseChosen {
 				e.printStackTrace();
 			}
 		}
+	}
+	public int getStudyPercent() {
+		return studyPercent;
+	}
+	public void setStudyPercent(int maxCourseIndex) {
+		double percent = (double)this.studyProgress / (double)maxCourseIndex;
+		this.studyPercent = (int)(percent * 100);
 	}
 }

@@ -16,6 +16,9 @@
 			<a href="<c:url value='/chosenstatus'/>" class="list-group-item <% if (active != null && active.equals("chosen")) {%> active <%} %>">
 				选课情况
 			</a>
+			<a href="<c:url value='/studyprogress'/>" class="list-group-item <% if (active != null && active.equals("studyprogress")) {%> active <%} %>">
+				学习进度
+			</a>
 			<a href="#" class="list-group-item">
 				视频审核
 			</a>
