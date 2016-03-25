@@ -207,6 +207,17 @@ public class MainController {
 	
 	@RequestMapping(value="/studyprogress", method=RequestMethod.GET)
 	public String studyProgress(HttpServletRequest request, ModelMap modelMap) {
+		fillStudyProgress(GlobalData.EMPTY_PLAN_ID, modelMap);
+		return "studyprogress";
+	}
+	
+	@RequestMapping(value="/studyprogress/{planId}", method=RequestMethod.GET)
+	public String studyProgressByPlan(@PathVariable int planId, HttpServletRequest request, ModelMap modelMap) {
+		fillStudyProgress(planId, modelMap);
+		return "studyprogress";
+	}
+	
+	private void fillStudyProgress(int planId, ModelMap modelMap) {
 		List<Integer> studyPlanIdList = chosenMapper.getStudyPlanIdList();
 		List<CourseMasterplan> planList = new ArrayList<>();
 		if (studyPlanIdList != null && studyPlanIdList.size() > 0) {
@@ -215,7 +226,17 @@ public class MainController {
 			}
 		}
 		if (planList.size() > 0) {
-			CourseMasterplan selectedPlan = planList.get(0);
+			CourseMasterplan selectedPlan = null;
+			if (planId != GlobalData.EMPTY_PLAN_ID) {
+				for (CourseMasterplan plan : planList) {
+					if (plan.getId() == planId) {
+						selectedPlan = plan;
+						break;
+					}
+				}
+			} else {
+				selectedPlan = planList.get(0);
+			}
 			if (selectedPlan != null) {
 				List<CourseChosen> chosenList = chosenMapper.getChosenListByPlan(selectedPlan.getId());
 				int maxCourseIndex = courseMapper.getMaxCourseIndex(selectedPlan.getId());
@@ -228,6 +249,5 @@ public class MainController {
 			}
 		}
 		modelMap.addAttribute("planList", planList);
-		return "studyprogress";
 	}
 }

@@ -60,7 +60,7 @@
 							</c:when>
 							<c:otherwise>
 								<td style="color:#449D44;">已开课 [结课日期:${chosen.deadLine}]</td>
-								<td><button class="btn btn-info btn-xs">查看进度</button></td>
+								<td><button class="btn btn-info btn-xs" onclick="changeProgress(${chosen.coursePlanId})">查看进度</button></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
@@ -105,6 +105,10 @@
 	function startCourse(planId) {
 		coursePlanId = planId;
 		$('#startCourseModal').modal('show');
+	}
+	
+	function changeProgress(planId) {
+		location.assign('<c:url value="/studyprogress/' + planId + '"/>');
 	}
 </script>
 </body>

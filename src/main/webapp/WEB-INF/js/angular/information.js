@@ -11,13 +11,15 @@ module.controller('InformationController', function($scope, $http) {
 		$scope.user = data;
 	});
 	
-	$scope.submit = function() {
-		var result = confirm('是否确认提交？');
-		if (result) {
-			$http.post('user/updateUser', $scope.user).success(function(data) {
-				console.log('Update user success: ' + data);
-				location.reload();
-			});
+	$scope.submit = function(isValid) {
+		if (isValid) {
+			var result = confirm('是否确认提交？');
+			if (result) {
+				$http.post('user/updateUser', $scope.user).success(function(data) {
+					console.log('Update user success: ' + data);
+					location.reload();
+				});
+			}
 		}
 	};
 });

@@ -19,16 +19,16 @@
 			<a href="<c:url value='/studyprogress'/>" class="list-group-item <% if (active != null && active.equals("studyprogress")) {%> active <%} %>">
 				学习进度
 			</a>
+			<a href="<c:url value='/myinformation'/>" class="list-group-item <% if (active != null && active.equals("myinformation")) {%> active <%} %>">
+				个人资料
+			</a>
+			<!-- 
 			<a href="#" class="list-group-item">
 				视频审核
 			</a>
 			<a href="#" class="list-group-item">
 				用户管理
 			</a>
-			<a href="<c:url value='/myinformation'/>" class="list-group-item <% if (active != null && active.equals("myinformation")) {%> active <%} %>">
-				个人资料
-			</a>
-			<!-- 
 			<a href="#" class="list-group-item">
 				我的讨论
 			</a>

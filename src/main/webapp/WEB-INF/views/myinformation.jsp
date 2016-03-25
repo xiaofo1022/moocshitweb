@@ -27,26 +27,47 @@
 		</jsp:include>
 	</div>
 	
-	<div class="col-md-6 col-md-offset-1" ng-controller="InformationController">
-		<form name="information_form" class="clearfix" style="margin:40px 0;">
+	<div class="col-md-6" ng-controller="InformationController">
+		<form name="information_form" class="form-horizontal clearfix" style="margin:40px 0;">
 			<input id="user-id" type="hidden" ng-model="user.id" value="${userId}" />
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="用户名" ng-model="user.username" required>
+				<label class="col-sm-4 control-label">账号</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" placeholder="账号" ng-model="user.account" required>
+				</div>
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control" placeholder="密码" ng-model="user.password" required>
+				<label class="col-sm-4 control-label">密码</label>
+				<div class="col-sm-8">
+					<input type="password" class="form-control" placeholder="密码" ng-model="user.password" required>
+				</div>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="邮箱" ng-model="user.email">
+				<label class="col-sm-4 control-label">姓名</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" placeholder="姓名" ng-model="user.username" required>
+				</div>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="电话" ng-minlength="11" ng-maxlength="11" ng-model="user.phone">
+				<label class="col-sm-4 control-label">邮箱</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" placeholder="邮箱" ng-model="user.email" required>
+				</div>
 			</div>
 			<div class="form-group">
-				<textarea class="form-control" placeholder="个人简介" rows="4" ng-model="user.remark"></textarea>
+				<label class="col-sm-4 control-label">电话</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" placeholder="电话" ng-minlength="11" ng-maxlength="11" ng-model="user.phone" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">个人简介</label>
+				<div class="col-sm-8">
+					<textarea class="form-control" placeholder="个人简介" rows="4" ng-model="user.remark"></textarea>
+				</div>
 			</div>
 			<div class="form-group" style="text-align:center;">
-				<button class="btn btn-primary" ng-disabled="information_form.$invalid" ng-click="submit()">提交</button>
+				<button class="btn btn-primary" ng-click="submit(information_form.$valid)">提交</button>
 			</div>
 		</form>
 	</div>

@@ -15,14 +15,14 @@ public interface UserMapper {
 	@ResultMap("userMap")
 	User getUser(@Param("ID") int userId);
 	
-	@Insert("INSERT INTO USERS (USERNAME, PASSWORD, EMAIL, PHONE, REMARK, ROLE_ID) VALUES (#{username}, #{password}, #{email}, #{phone}, #{remark}, #{roleId})")
+	@Insert("INSERT INTO USERS (USERNAME, PASSWORD, EMAIL, PHONE, REMARK, ROLE_ID, ACCOUNT) VALUES (#{username}, #{password}, #{email}, #{phone}, #{remark}, #{roleId}, #{account})")
 	@Options(useGeneratedKeys=true)
 	int addUser(User user);
 	
-	@Select("SELECT ID FROM USERS WHERE USERNAME = #{username} AND PASSWORD = #{password}")
+	@Select("SELECT ID FROM USERS WHERE ACCOUNT = #{account} AND PASSWORD = #{password}")
 	@ResultMap("userMap")
 	User login(User user);
 	
-	@Update("UPDATE USERS SET USERNAME = #{username}, PASSWORD = #{password}, EMAIL = #{email}, PHONE = #{phone}, REMARK = #{remark} WHERE ID = #{id}")
+	@Update("UPDATE USERS SET USERNAME = #{username}, PASSWORD = #{password}, EMAIL = #{email}, PHONE = #{phone}, REMARK = #{remark}, ACCOUNT = #{account} WHERE ID = #{id}")
 	int updateUser(User user);
 }

@@ -8,4 +8,5 @@ public class GlobalData {
 	public static final int IS_START = 1;
 	public static final int NOT_START = 0;
 	public static final int EMPTY_COURSE_ID = 0;
+	public static final int EMPTY_PLAN_ID = 0;
 }

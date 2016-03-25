@@ -50,9 +50,11 @@ public class UserController {
 	
 	@RequestMapping(value="/addUser", method=RequestMethod.POST)
 	@ResponseBody
-	public int addUser(@RequestBody User user) {
+	public int addUser(@RequestBody User user, HttpServletRequest request) {
 		user.setRoleId(Integer.valueOf(RoleEnum.STUDENT.toString()));
 		userMapper.addUser(user);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("user", userMapper.getUser(user.getId()));
 		return user.getId();
 	}
 	

@@ -35,7 +35,7 @@
 							<p class="active">${plan.planName}</p>
 						</c:when>
 						<c:otherwise>
-							<p>${plan.planName}</p>
+							<p onclick="changeProgress(${plan.id})">${plan.planName}</p>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -76,6 +76,11 @@
 <jsp:include page="footer.jsp" flush="true"/>
 
 <script>
+
+	function changeProgress(planId) {
+		location.assign('<c:url value="/studyprogress/' + planId + '"/>');
+	}
+
 </script>
 
 </body>

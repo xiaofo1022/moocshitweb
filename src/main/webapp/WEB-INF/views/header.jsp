@@ -46,7 +46,7 @@
 								<div class="modal-body">
 									<form name="login_form">
 										<div class="form-group">
-											<input id="login-name" type="text" class="form-control" placeholder="用户名" ng-model="loginUser.username" required>
+											<input id="login-name" type="text" class="form-control" placeholder="用户名" ng-model="loginUser.account" required>
 										</div>
 										<div class="form-group">
 											<input id="login-pass" type="password" class="form-control" placeholder="密码" ng-model="loginUser.password" required>
@@ -64,10 +64,10 @@
 					</div>
 					<script>
 						function login() {
-							var username = $('#login-name').val();
+							var account = $('#login-name').val();
 							var password = $('#login-pass').val();
 							
-							if (!username) {
+							if (!account) {
 								alert('请填写用户名');
 								return;
 							}
@@ -80,7 +80,7 @@
 								url: "<c:url value='/user/login'/>",
 								type: "POST",
 								contentType : "application/json",
-								data: JSON.stringify({username:username, password:password}),
+								data: JSON.stringify({account:account, password:password}),
 								success: function(data) {
 									if (data.message != 'success') {
 										alert(data.message);

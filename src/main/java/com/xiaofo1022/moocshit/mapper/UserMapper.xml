@@ -14,6 +14,8 @@
         <result property="phone" column="PHONE" />
         <result property="remark" column="REMARK" />
         <result property="roleId" column="ROLE_ID" />
+        <result property="account" column="ACCOUNT" />
+        <result property="isActive" column="IS_ACTIVE" />
         
         <association property="role" 
             column="ROLE_ID"
