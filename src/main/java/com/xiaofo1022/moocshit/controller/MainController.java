@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.xiaofo1022.moocshit.core.CoreUtil;
 import com.xiaofo1022.moocshit.core.GlobalData;
 import com.xiaofo1022.moocshit.dao.CourseTypeDao;
-import com.xiaofo1022.moocshit.mapper.CommentMapper;
 import com.xiaofo1022.moocshit.mapper.CourseChosenMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
-import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
 import com.xiaofo1022.moocshit.model.CourseChosen;
 import com.xiaofo1022.moocshit.model.CourseMasterplan;
@@ -32,10 +30,6 @@ public class MainController {
 
 	@Autowired
 	private CourseMapper courseMapper;
-	@Autowired
-	private CourseTypeMapper courseTypeMapper;
-	@Autowired
-	private CommentMapper commentMapper;
 	@Autowired
 	private CourseMasterplanMapper courseMasterplanMapper;
 	@Autowired

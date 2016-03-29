@@ -8,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
-import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -17,8 +16,6 @@ public class CourseDaoTest {
 	
 	@Autowired
 	private CourseMapper courseMapper;
-	@Autowired
-	private CourseTypeMapper courseTypeMapper;
 	
 	public void testCourseDao() {
 		Course course = courseMapper.getCourse(1);
