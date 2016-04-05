@@ -29,7 +29,7 @@
 							var result = confirm("是否确认退出？");
 							if (result) {
 								$.get("<c:url value='/user/logout' />", function(data) {
-									location.replace("index");
+									location.replace("<c:url value='/index' />");
 								});
 							}
 						}

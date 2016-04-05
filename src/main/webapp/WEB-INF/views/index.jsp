@@ -29,13 +29,13 @@
 
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
-			<img src="images/loop/loop-4.jpg">
+			<img src="images/loop/index1.png">
 		</div>
 		<div class="item">
-			<img src="images/loop/loop-5.png">
+			<img src="images/loop/index2.png">
 		</div>
 		<div class="item">
-			<img src="images/loop/loop-1.jpg">
+			<img src="images/loop/index3.png">
 		</div>
 	</div>
 
@@ -45,6 +45,13 @@
 	<a class="right carousel-control" href="#index-loop" role="button" data-slide="next">
 		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 	</a>
+	
+	<p style="padding:40px;font-size:14px;">
+		MOOC（massive open online courses）是2012年由美国顶级大学陆续设立的网络学习平台，已为全球性网络系统学习的最新模式。在北京大学宣布“北大网络课程项目”启动后，哈师大西语学院顺应国际课程改革趋势，开设了以“当代大学生视角下中西方文化”为主题的MOOC微课程。
+		哈师大学生MOOC讲师团是西语首创的一只学生网络教学团队，旨在打造网络教学平台，培训学生讲师，让学生参与到教学的全部环节，实现真正意义上的教学实践。
+		西语MOOC讲师团遵循的教学特色是学生提出、学生筹备、学生授课、学生评估，把主导权全权交给学生。
+		哈师大学生MOOC学院一直在为打造多种网络平台，进行课程内容的资源共享而前行。
+	</p>
 </div>
 
 <jsp:include page="footer.jsp" flush="true"/>

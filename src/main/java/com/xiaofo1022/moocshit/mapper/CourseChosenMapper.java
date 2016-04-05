@@ -33,7 +33,7 @@ public interface CourseChosenMapper {
 	@Select("SELECT COUNT(STUDENT_ID) FROM COURSE_CHOSEN WHERE COURSE_PLAN_ID = #{coursePlanId}")
 	int getStudentCount(@Param("coursePlanId") int coursePlanId);
 	
-	@Select("SELECT * FROM COURSE_CHOSEN GROUP BY COURSE_PLAN_ID, IS_START ORDER BY INSERT_DATETIME")
+	@Select("SELECT * FROM COURSE_CHOSEN ORDER BY INSERT_DATETIME")
 	@ResultMap("courseChosenMap")
 	List<CourseChosen> getChosenStatusList();
 	
