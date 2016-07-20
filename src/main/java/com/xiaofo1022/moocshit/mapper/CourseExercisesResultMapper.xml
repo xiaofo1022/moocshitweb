@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+	PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.xiaofo1022.moocshit.mapper.CourseExercisesResultMapper">
+
+	<resultMap id="courseExercisesResultMap"
+		type="com.xiaofo1022.moocshit.model.CourseExercisesResult">
+		<id property="id" column="ID" />
+		<result property="insertDatetime" column="INSERT_DATETIME"
+			javaType="java.util.Date" />
+		<result property="updateDatetime" column="UPDATE_DATETIME"
+			javaType="java.util.Date" />
+		<result property="courseId" column="COURSE_ID" />
+		<result property="coursePlanId" column="COURSE_PLAN_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="exercisesText" column="EXERCISES_TEXT" />
+		<result property="score" column="SCORE" />
+		<result property="isDone" column="IS_DONE" />
+		<result property="isActive" column="IS_ACTIVE" />
+
+		<association property="courseMasterplan" column="COURSE_PLAN_ID"
+			javaType="com.xiaofo1022.moocshit.model.CourseMasterplan" select="selectCourseMasterplan" />
+
+		<association property="course" column="COURSE_ID"
+			javaType="com.xiaofo1022.moocshit.model.Course" select="selectCourse" />
+			
+		<association property="user" column="USER_ID"
+			javaType="com.xiaofo1022.moocshit.model.User" select="selectStudent" />
+	</resultMap>
+
+	<select id="selectCourseMasterplan"
+		resultMap="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.courseMasterplanMap">
+		SELECT * FROM COURSE_MASTERPLAN WHERE ID = #{id}
+	</select>
+
+	<select id="selectCourse"
+		resultMap="com.xiaofo1022.moocshit.mapper.CourseMapper.courseMap">
+		SELECT * FROM COURSE WHERE ID = #{id}
+	</select>
+	
+	<select id="selectStudent" resultMap="com.xiaofo1022.moocshit.mapper.UserMapper.userMap">
+		SELECT * FROM USERS WHERE ID = #{id}
+	</select>
+</mapper>

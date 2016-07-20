@@ -1,67 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context.xsd">
-	   
+
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${jdbc.driver}"/>
-		<property name="url" value="${jdbc.url}"/>
-		<property name="username" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
-		<property name="maxIdle" value="${dbcp.maxIdle}"/>
-		<property name="maxActive" value="${dbcp.maxActive}"/>
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxIdle" value="${dbcp.maxIdle}" />
+		<property name="maxActive" value="${dbcp.maxActive}" />
 	</bean>
-	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	    <property name="dataSource" ref="dataSource" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<tx:annotation-driven/>
-	
+	<tx:annotation-driven />
+
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-	    <property name="dataSource" ref="dataSource"/>
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    	<property name="dataSource" ref="dataSource" /> 
-    </bean>
-    
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
 	<!-- Mappers -->
-	<bean id="courseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-	<bean id="courseTypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseTypeMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-	<bean id="roleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.RoleMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.UserMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-    <bean id="commentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CommentMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-    <bean id="courseMasterplanMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-    <bean id="courseChosenMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
-    	<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseChosenMapper" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-    </bean>
-    <!-- Mappers -->
-    
+	<bean id="courseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CourseMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="courseTypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.xiaofo1022.moocshit.mapper.CourseTypeMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="roleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.RoleMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.UserMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="commentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.xiaofo1022.moocshit.mapper.CommentMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="courseMasterplanMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="courseChosenMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.xiaofo1022.moocshit.mapper.CourseChosenMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="courseExercisesMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.xiaofo1022.moocshit.mapper.CourseExercisesMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="courseExercisesResultMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.xiaofo1022.moocshit.mapper.CourseExercisesResultMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<!-- Mappers -->
+
 	<context:component-scan base-package="com.xiaofo1022.moocshit.dao" />
 </beans>

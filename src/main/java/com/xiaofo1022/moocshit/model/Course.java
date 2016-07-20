@@ -18,6 +18,7 @@ public class Course {
 	private int playTimes;
 	private List<Comment> commentList;
 	private int courseIndex;
+	private int exercisesId;
 	
 	public long getId() {
 		return id;
@@ -97,4 +98,10 @@ public class Course {
 	public void setCourseIndex(int courseIndex) {
 		this.courseIndex = courseIndex;
 	}
+  public int getExercisesId() {
+    return exercisesId;
+  }
+  public void setExercisesId(int exercisesId) {
+    this.exercisesId = exercisesId;
+  }
 }

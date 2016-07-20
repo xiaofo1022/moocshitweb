@@ -33,7 +33,7 @@ public class UserController {
 			session.setAttribute("user", userMapper.getUser(loginUser.getId()));
 			return new LoginResponse("success");
 		} else {
-			return new LoginResponse("用户名或密码错误");
+			return new LoginResponse("鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒");
 		}
 	}
 	

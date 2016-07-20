@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">  
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 <configuration>
-    <mappers>
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseTypeMapper.xml" />
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseMapper.xml" />
-        <mapper resource="com.xiaofo1022.moocshit.mapper.RoleMapper.xml" />
-        <mapper resource="com.xiaofo1022.moocshit.mapper.UserMapper.xml" />
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CommentMapper.xml" />
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.xml" />
-        <mapper resource="com.xiaofo1022.moocshit.mapper.CourseChosenMapper.xml" />
-    </mappers>
+	<mappers>
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CourseTypeMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CourseMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.RoleMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.UserMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CommentMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CourseChosenMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CourseExercisesMapper.xml" />
+		<mapper resource="com.xiaofo1022.moocshit.mapper.CourseExercisesResultMapper.xml" />
+	</mappers>
 </configuration>

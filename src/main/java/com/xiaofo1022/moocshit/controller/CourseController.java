@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaofo1022.moocshit.core.GlobalData;
+import com.xiaofo1022.moocshit.mapper.CourseExercisesMapper;
+import com.xiaofo1022.moocshit.mapper.CourseExercisesResultMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
 import com.xiaofo1022.moocshit.mapper.CourseTypeMapper;
 import com.xiaofo1022.moocshit.model.Course;
+import com.xiaofo1022.moocshit.model.CourseExercises;
+import com.xiaofo1022.moocshit.model.CourseExercisesResult;
 import com.xiaofo1022.moocshit.model.CourseMasterplan;
 import com.xiaofo1022.moocshit.model.CourseType;
 import com.xiaofo1022.moocshit.model.User;
@@ -32,6 +36,10 @@ public class CourseController {
 	private CourseTypeMapper courseTypeMapper;
 	@Autowired
 	private CourseMasterplanMapper courseMasterplanMapper;
+	@Autowired
+	private CourseExercisesMapper courseExercisesMapper;
+	@Autowired
+	private CourseExercisesResultMapper exercisesResultMapper;
 	
 	@RequestMapping(value="/allCourseType", method=RequestMethod.GET)
 	@ResponseBody
@@ -82,4 +90,36 @@ public class CourseController {
 		courseMasterplanMapper.addCourseMasterplan(courseMasterplan);
 		return courseMasterplan.getId();
 	}
+	
+	@RequestMapping(value="/courseExercises/{courseId}", method=RequestMethod.GET)
+  @ResponseBody
+  public CourseExercises getCourseExercisesByCourseId(@PathVariable int courseId) {
+	  CourseExercises existExer = courseExercisesMapper.getCourseExercisesByCourseId(courseId);
+	  if (existExer != null) {
+	    existExer.setExercisesText(existExer.getExercisesText().replaceAll("&apos;", "'"));
+	  }
+    return existExer;
+  }
+	
+	@RequestMapping(value="/addCourseExercises", method=RequestMethod.POST)
+  @ResponseBody
+  public int addCourseExercises(@RequestBody CourseExercises courseExercises) {
+	  courseExercises.setExercisesText(courseExercises.getExercisesText().replaceAll("'", "&apos;"));
+	  CourseExercises existExer = courseExercisesMapper.getCourseExercisesByCourseId(courseExercises.getCourseId());
+	  if (existExer == null) {
+	    courseExercisesMapper.addCourseExercises(courseExercises);
+	  } else {
+	    courseExercisesMapper.updateCourseExercises(courseExercises.getExercisesText(), courseExercises.getCourseId());
+	  }
+    return courseExercises.getId();
+  }
+	
+	@RequestMapping(value="/finishExercises", method=RequestMethod.POST)
+  @ResponseBody
+  public int finishExercises(@RequestBody CourseExercisesResult courseExercisesResult, HttpServletRequest request) {
+	  courseExercisesResult.setExercisesText(courseExercisesResult.getExercisesText().replaceAll("'", "&apos;"));
+	  exercisesResultMapper.deleteResult(courseExercisesResult.getCourseId());
+	  exercisesResultMapper.addCourseExercisesResult(courseExercisesResult);
+	  return courseExercisesResult.getId();
+  }
 }

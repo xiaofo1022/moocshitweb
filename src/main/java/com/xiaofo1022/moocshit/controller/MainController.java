@@ -17,10 +17,12 @@ import com.xiaofo1022.moocshit.core.CoreUtil;
 import com.xiaofo1022.moocshit.core.GlobalData;
 import com.xiaofo1022.moocshit.dao.CourseTypeDao;
 import com.xiaofo1022.moocshit.mapper.CourseChosenMapper;
+import com.xiaofo1022.moocshit.mapper.CourseExercisesResultMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMapper;
 import com.xiaofo1022.moocshit.mapper.CourseMasterplanMapper;
 import com.xiaofo1022.moocshit.model.Course;
 import com.xiaofo1022.moocshit.model.CourseChosen;
+import com.xiaofo1022.moocshit.model.CourseExercisesResult;
 import com.xiaofo1022.moocshit.model.CourseMasterplan;
 import com.xiaofo1022.moocshit.model.CourseType;
 import com.xiaofo1022.moocshit.model.User;
@@ -36,6 +38,8 @@ public class MainController {
 	private CourseTypeDao courseTypeDao;
 	@Autowired
 	private CourseChosenMapper chosenMapper;
+	@Autowired
+	private CourseExercisesResultMapper resultMapper;
 	
 	@RequestMapping(value={"/", "/index"}, method=RequestMethod.GET)
 	public String main(HttpServletRequest request, ModelMap modelMap) {
@@ -244,4 +248,21 @@ public class MainController {
 		}
 		modelMap.addAttribute("planList", planList);
 	}
+	
+	@RequestMapping(value="/bbs", method=RequestMethod.GET)
+  public String bbs(HttpServletRequest request, ModelMap modelMap) {
+    return "bbs";
+  }
+	
+	@RequestMapping(value="/bbsdetail", method=RequestMethod.GET)
+  public String bbsdetail(HttpServletRequest request, ModelMap modelMap) {
+    return "bbsdetail";
+  }
+	
+	@RequestMapping(value="/exercisesscore", method=RequestMethod.GET)
+  public String exercisesscore(HttpServletRequest request, ModelMap modelMap) {
+	  List<CourseExercisesResult> resultList = resultMapper.getAllResult();
+	  modelMap.addAttribute("resultList", resultList);
+    return "exercisesscore";
+  }
 }

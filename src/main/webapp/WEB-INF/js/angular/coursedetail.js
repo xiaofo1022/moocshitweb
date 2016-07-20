@@ -30,3 +30,21 @@ module.controller('CourseDetailController', function($scope, $http) {
 		}
 	};
 });
+
+module.controller('CourseEditController', function($scope, $http) {
+  $scope.courseExercises = {};
+  $scope.submit = function(isValid) {
+    if (isValid) {
+      var result = confirm('是否确认提交？');
+      if (result) {
+        $scope.courseExercises.courseId = globalCourseId;
+        $scope.courseExercises.coursePlanId = $('#course_plan_id').val();
+        $scope.courseExercises.userId = $('#user_id').val();
+        $http.post(baseUrl + 'course/finishExercises', $scope.courseExercises).success(function(data) {
+          console.log('Add course exercises success: ' + data);
+          location.reload();
+        });
+      }
+    }
+  };
+});

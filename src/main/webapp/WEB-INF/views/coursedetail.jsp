@@ -16,7 +16,7 @@
 <script src="<c:url value='/js/angular/coursedetail.js'/>"></script>
 <script src="<c:url value='/js/angular/login.js'/>"></script>
 </head>
-<body>
+<body ng-app="coursedetail">
 
 <jsp:include page="header.jsp" flush="true"/>
 
@@ -72,13 +72,19 @@
 										第${status.index + 1}课：${courseItem.courseName}
 										<c:choose>
 											<c:when test="${courseItem.courseIndex == lastCourseIndex}">
-												<span style="float:right;">[已修]</span>
+												<span style="float:right;">
+													[已修]
+													<a style="color:#fff;" onclick="getExercises(event, ${courseItem.id})">做题</a>
+												</span>
 											</c:when>
 											<c:when test="${courseItem.courseIndex == studyProgress}">
 												<span style="float:right;">[学习中]</span>
 											</c:when>
 											<c:when test="${courseItem.courseIndex < studyProgress}">
-												<span style="float:right;">[已修]</span>
+												<span style="float:right;">
+													[已修]
+													<a style="color:#fff;" onclick="getExercises(event, ${courseItem.id})">做题</a>
+												</span>
 											</c:when>
 											<c:otherwise>
 												<span style="float:right;">[未修]</span>
@@ -91,13 +97,19 @@
 										第${status.index + 1}课：${courseItem.courseName}
 										<c:choose>
 											<c:when test="${courseItem.courseIndex == lastCourseIndex}">
-												<span style="float:right;">[已修]</span>
+												<span style="float:right;">
+													[已修]
+													<a onclick="getExercises(event, ${courseItem.id})">做题</a>
+												</span>
 											</c:when>
 											<c:when test="${courseItem.courseIndex == studyProgress}">
 												<span style="float:right;">[学习中]</span>
 											</c:when>
 											<c:when test="${courseItem.courseIndex < studyProgress}">
-												<span style="float:right;">[已修]</span>
+												<span style="float:right;">
+													[已修]
+													<a onclick="getExercises(event, ${courseItem.id})">做题</a>
+												</span>
 											</c:when>
 											<c:otherwise>
 												<span style="float:right;">[未修]</span>
@@ -127,7 +139,7 @@
 							</p>
 						</div>
 					</c:forEach>
-					<div class="comment-block clearfix" ng-app="coursedetail" ng-controller="CourseDetailController">
+					<div class="comment-block clearfix" ng-controller="CourseDetailController">
 						<form name="comment_form">
 							<textarea class="form-control" placeholder="我的评论" rows="3" ng-model="comment.comment" required></textarea>
 							<button class="btn btn-primary mt10 fright" ng-disabled="comment_form.$invalid" ng-click="submitComment()">提交</button>
@@ -153,6 +165,28 @@
 		</div>
 	</div>
 </div>
+</div>
+
+<div id="add-exercises-modal" class="modal fade" ng-controller="CourseEditController">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">课程习题</h4>
+			</div>
+			<form name="exercises_form" class="form-horizontal">
+				<div class="modal-body">
+					<textarea id="exercises_text" class="form-control" rows="18" ng-model="courseExercises.exercisesText" required></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button class="btn btn-primary" ng-click="submit(exercises_form.$valid)">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <jsp:include page="footer.jsp" flush="true"/>
@@ -208,9 +242,24 @@
 	function toSelectedCourse(element, courseId) {
 		var span = $(element).find('span');
 		var text = span.text();
-		if (text == '[已修]' || text == '[学习中]') {
+		if (text.indexOf('已修') >= 0 || text.indexOf('学习中') >= 0) {
 			location.assign('<c:url value="/courseDetail/' + planId + '/' + courseId + '"/>');
 		}
+	}
+	
+	var globalCourseId;
+	
+	function getExercises(event, courseId) {
+	  event.stopPropagation();
+	  globalCourseId = courseId;
+	  $.get('<c:url value="/course/courseExercises/' + courseId + '"/>', function(data) {
+	    if (data == null || data.exercisesText == null) {
+	      alert('此课程还未出题');
+	    } else {
+	      $('#exercises_text').val(data.exercisesText);
+	      $('#add-exercises-modal').modal('show');
+	    }
+	  });
 	}
 </script>
 </body>

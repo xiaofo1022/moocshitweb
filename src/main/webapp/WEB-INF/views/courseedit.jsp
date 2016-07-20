@@ -12,6 +12,7 @@
 <script src="<c:url value='/js/jquery.min.js' />"></script>
 <script src="<c:url value='/js/bootstrap.min.js' />"></script>
 <script src="<c:url value='/js/angular.min.js' />"></script>
+<script src="<c:url value='/js/angular/courseedit.js' />"></script>
 <style>
 	h1, h3, h5 {
 		color: #286A46;
@@ -29,7 +30,7 @@
 	}
 </style>
 </head>
-<body>
+<body ng-app="courseedit">
 
 <jsp:include page="header.jsp" flush="true">
 	<jsp:param value="background" name="active" />
@@ -59,6 +60,7 @@
 							第${course.courseIndex}课 ${course.courseName} 
 							<button class="btn btn-success btn-xs">编辑</button>
 							<button class="btn btn-danger btn-xs">删除</button>
+							<button class="btn btn-primary btn-xs" onclick="updateExercises(${course.id})">出题</button>
 						</h5>
 						<p>${course.courseRemark}</p>
 					</li>
@@ -69,7 +71,45 @@
 </div>
 </div>
 
+<div id="add-exercises-modal" class="modal fade" ng-controller="CourseEditController">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">课程习题</h4>
+			</div>
+			<form name="exercises_form" class="form-horizontal">
+				<div class="modal-body">
+					<textarea id="exercises_text" class="form-control" rows="18" ng-model="courseExercises.exercisesText" required></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button class="btn btn-primary" ng-click="submit(exercises_form.$valid)">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+				
 <jsp:include page="footer.jsp" flush="true"/>
 
+<script>
+	var baseUrl = "<c:url value='/'/>";
+	var globalCourseId;
+	
+	function updateExercises(courseId) {
+	  globalCourseId = courseId;
+	  $.get('<c:url value="/course/courseExercises/' + courseId + '"/>', function(data) {
+	    if (data == null) {
+	      $('#exercises_text').val('');
+	    } else {
+	      $('#exercises_text').val(data.exercisesText);
+	    }
+	    $('#add-exercises-modal').modal('show');
+	  });
+	}
+</script>
 </body>
 </html>

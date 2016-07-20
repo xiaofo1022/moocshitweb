@@ -1,8 +1,15 @@
+<%@ page import="com.xiaofo1022.moocshit.model.Role" %>
+<%@ page import="com.xiaofo1022.moocshit.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	boolean isLogined = (request.getSession(false).getAttribute("user") != null);
 	String active = request.getParameter("active");
+	User user = (User) request.getSession(false).getAttribute("user");
+	Role role = new Role();
+	if (user != null) {
+	  role = user.getRole();
+	}
 %>
 <nav class="navbar navbar-default" style="margin-bottom:0;">
 	<div class="container-fluid">
@@ -16,13 +23,20 @@
 			<ul class="nav navbar-nav">
 				<li <% if (active != null && active.equals("index")) { %> class="active" <% } %>><a href="<c:url value='/index' />">首页</a></li>
 				<li <% if (active != null && active.equals("course")) { %> class="active" <% } %>><a href="<c:url value='/course' />">课程</a></li>
+				<li <% if (active != null && active.equals("bbs")) { %> class="active" <% } %>><a href="<c:url value='/bbs' />">论坛</a></li>
 				<!-- 
 				<li><a href="bbs">讨论区</a></li>
 				-->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<% if (isLogined) { %>
-					<li <% if (active != null && active.equals("background")) { %> class="active" <% } %>><a href="<c:url value='/coursemanage' />">[个人中心 ]</a></li>
+					<li <% if (active != null && active.equals("background")) { %> class="active" <% } %>>
+						<% if (role.getRoleName() != null && !role.getRoleName().equals("STUDENT")) { %>
+							<a href="<c:url value='/coursemanage' />">[个人中心]</a>
+						<% } else { %>
+							<a href="<c:url value='/myinformation' />">[个人中心]</a>
+						<% } %>
+					</li>
 					<li><a href="#" onclick="logout()">退出</a></li>
 					<script>
 						function logout() {
