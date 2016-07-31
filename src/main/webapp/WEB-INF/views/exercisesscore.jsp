@@ -56,7 +56,7 @@
 							</c:otherwise>
 						</c:choose>
 						<td>
-							<button class="btn btn-info btn-xs">评分</button>
+							<button class="btn btn-info btn-xs" onclick="scoreTheExercise(${result.courseId}, ${result.userId})">评分</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -67,10 +67,52 @@
 </div>
 </div>
 
+<div id="exercises-modal" class="modal fade" ng-controller="CourseEditController">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">试题评分</h4>
+			</div>
+			<form name="exercises_form" class="form-horizontal">
+				<div class="modal-body">
+					<textarea id="exercises_text" class="form-control" rows="18"></textarea>
+				</div>
+				<div class="modal-footer">
+					<input id="score" type="number" />分数
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="doneTheExercises()">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <jsp:include page="footer.jsp" flush="true"/>
 
 <script>
 	var baseUrl = '<c:url value="/"/>';
+	var baseCourseId;
+	var baseUserId;
+	
+	function scoreTheExercise(courseId, userId) {
+	  baseCourseId = courseId;
+	  baseUserId = userId;
+	  $.get(baseUrl + '/course/getExercisesResult?courseId=' + courseId + '&userId=' + userId, function(data) {
+	    $('#exercises_text').val(data.exercisesText);
+	    $('#exercises-modal').modal('show');
+	  });
+	}
+	
+	function doneTheExercises() {
+	  var score = $('#score').val();
+	  $.get(baseUrl + '/course/doneTheExercises?courseId=' + baseCourseId + '&userId=' + baseUserId + '&score=' + score, function(data) {
+	    $('#exercises-modal').modal('hide');
+	    location.reload();
+	  });
+	}
 </script>
 </body>
 </html>

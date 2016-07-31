@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.xiaofo1022.moocshit.model.CourseExercisesResult;
 
@@ -21,10 +22,17 @@ public interface CourseExercisesResultMapper {
   @ResultMap("courseExercisesResultMap")
   CourseExercisesResult getCourseExercisesResultByCourseId(@Param("courseId") int courseId);
   
+  @Select("SELECT * FROM COURSE_EXERCISES_RESULT WHERE COURSE_ID = #{courseId} AND USER_ID = #{userId}")
+  @ResultMap("courseExercisesResultMap")
+  CourseExercisesResult getCourseExercisesResultByCourseIdAndUserId(@Param("courseId") int courseId, @Param("userId") int userId);
+  
   @Delete("DELETE FROM COURSE_EXERCISES_RESULT WHERE COURSE_ID = #{courseId}")
   int deleteResult(@Param("courseId") int courseId);
   
   @Select("SELECT * FROM COURSE_EXERCISES_RESULT ORDER BY INSERT_DATETIME")
   @ResultMap("courseExercisesResultMap")
   List<CourseExercisesResult> getAllResult();
+  
+  @Update("UPDATE COURSE_EXERCISES_RESULT SET SCORE = #{score}, IS_DONE = 1 WHERE COURSE_ID = #{courseId} AND USER_ID = #{userId}")
+  int updateResult(@Param("courseId") int courseId, @Param("userId") int userId, @Param("score") int score);
 }

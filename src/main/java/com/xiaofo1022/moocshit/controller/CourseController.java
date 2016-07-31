@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaofo1022.moocshit.core.GlobalData;
@@ -122,4 +123,16 @@ public class CourseController {
 	  exercisesResultMapper.addCourseExercisesResult(courseExercisesResult);
 	  return courseExercisesResult.getId();
   }
+	
+	@RequestMapping(value="/getExercisesResult", method=RequestMethod.GET)
+  @ResponseBody
+	public CourseExercisesResult getExercisesResult(@RequestParam("courseId") int courseId, @RequestParam("userId") int userId) {
+	  return exercisesResultMapper.getCourseExercisesResultByCourseIdAndUserId(courseId, userId);
+	}
+	
+	@RequestMapping(value="/doneTheExercises", method=RequestMethod.GET)
+  @ResponseBody
+	public int doneTheExercises(@RequestParam("courseId") int courseId, @RequestParam("userId") int userId, @RequestParam("score") int score) {
+	  return exercisesResultMapper.updateResult(courseId, userId, score);
+	}
 }
